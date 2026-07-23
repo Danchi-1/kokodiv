@@ -168,7 +168,7 @@ class KokodivRequestHandler(BaseHTTPRequestHandler):
                         data=req_payload,
                         headers={"Content-Type": "application/json"}
                     )
-                    with urllib.request.urlopen(req, timeout=10) as llama_resp:
+                    with urllib.request.urlopen(req, timeout=60) as llama_resp:
                         llama_json = json.loads(llama_resp.read().decode('utf-8'))
                         if "choices" in llama_json and len(llama_json["choices"]) > 0:
                             choice = llama_json["choices"][0]
