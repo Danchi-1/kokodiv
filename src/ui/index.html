@@ -816,10 +816,15 @@
           data.sessions.forEach(s => {
             const div = document.createElement("div");
             div.className = `nav-item ${s.session_id === currentSessionId ? 'active' : ''}`;
-            div.innerText = s.title;
+            div.innerText = s.title || "Farm Consultation";
             div.onclick = () => selectSession(s.session_id, s.title);
             container.appendChild(div);
           });
+
+          // Auto-load most recent chat thread on launch if none selected
+          if (!currentSessionId) {
+            selectSession(data.sessions[0].session_id, data.sessions[0].title);
+          }
         }
       } catch (err) {}
     }
