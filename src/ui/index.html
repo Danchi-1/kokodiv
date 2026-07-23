@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kokodiv — Offline Cocoa Farm Doctor</title>
+  <!-- Lucide Icons Library -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg: #09090b;
+      --sidebar: #121215;
+      --surface: #18181b;
+      --border: #27272a;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --primary: #16a34a;
+      --primary-hover: #15803d;
+      --primary-muted: rgba(22, 163, 74, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); height: 100vh; overflow: hidden; display: flex; -webkit-font-smoothing: antialiased; }
+
+    /* Lucide icon alignment */
+    .icon { display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; stroke-width: 2px; }
+
+    /* Page Navigation Views */
+    .page-view { display: none; width: 100%; height: 100vh; overflow: hidden; }
+    .page-view.active { display: flex; }
+
+    /* LANDING PAGE STYLING */
+    .landing-container { width: 100%; height: 100vh; overflow-y: auto; background-color: var(--bg); display: flex; flex-direction: column; }
+    .landing-nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; border-bottom: 1px solid var(--border); max-width: 1300px; margin: 0 auto; width: 100%; }
+    .brand-logo { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); display: flex; align-items: center; gap: 0.5rem; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: color 0.15s; }
+    .nav-link:hover { color: var(--text); }
+
+    .hero-section { max-width: 1100px; margin: 4rem auto 3rem auto; text-align: center; padding: 0 2rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background-color: var(--primary-muted); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero-title { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; color: var(--text); margin-bottom: 1.25rem; }
+    .hero-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 2.5rem auto; line-height: 1.6; }
+
+    .hero-actions { display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem; }
+    .btn-primary { background-color: var(--primary); color: #fff; border: none; padding: 0.85rem 1.75rem; border-radius: 0.5rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.15s; }
+    .btn-primary:hover { background-color: var(--primary-hover); }
+    .btn-secondary { background-color: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 0.85rem 1.75rem; border-radius: 0.5rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.15s; }
+    .btn-secondary:hover { background-color: var(--border); }
+
+    .grid-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto 4rem auto; padding: 0 2rem; }
+    @media (max-width: 900px) { .grid-features { grid-template-columns: 1fr; } }
+    .feature-card { background-color: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; text-align: left; }
+    .feature-icon-box { background-color: var(--primary-muted); color: #4ade80; width: 42px; height: 42px; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; }
+    .feature-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
+    .feature-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* WORKSTATION APP STYLING */
+    .app-container { display: flex; width: 100%; height: 100vh; overflow: hidden; }
+    .sidebar { width: 280px; background-color: var(--sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 1rem; flex-shrink: 0; }
+    .btn-new { background-color: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 0.65rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; width: 100%; margin-bottom: 1rem; }
+    .btn-new:hover { background-color: var(--border); }
+
+    .nav-group-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); padding: 0.5rem 0.5rem 0.25rem 0.5rem; }
+    .nav-item { padding: 0.5rem 0.65rem; border-radius: 0.375rem; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.65rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.25rem; }
+    .nav-item:hover, .nav-item.active { background-color: var(--surface); color: var(--text); }
+
+    .session-list { display: flex; flex-direction: column; gap: 0.25rem; overflow-y: auto; flex: 1; }
+
+    .main-workspace { flex: 1; display: flex; flex-direction: column; background-color: var(--bg); height: 100vh; position: relative; }
+    .top-header { padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background-color: var(--bg); }
+    
+    .chat-stream { flex: 1; overflow-y: auto; padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; max-width: 900px; margin: 0 auto; width: 100%; }
+    .msg-row { display: flex; gap: 1rem; }
+    .msg-row.user { justify-content: flex-end; }
+    .msg-bubble { max-width: 80%; padding: 1rem 1.25rem; border-radius: 0.75rem; font-size: 0.9rem; line-height: 1.6; }
+    .msg-row.user .msg-bubble { background-color: var(--surface); color: var(--text); border-bottom-right-radius: 0.15rem; }
+    .msg-row.assistant .msg-bubble { background-color: #121215; color: var(--text); border: 1px solid var(--border); border-bottom-left-radius: 0.15rem; }
+    .msg-img { max-width: 250px; max-height: 250px; border-radius: 0.5rem; margin-bottom: 0.75rem; border: 1px solid var(--border); display: block; }
+
+    .dock-container { padding: 1rem 2rem 1.5rem 2rem; max-width: 900px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 0.5rem; }
+    .preview-container { display: flex; align-items: center; gap: 0.5rem; background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.5rem 0.75rem; width: max-content; }
+    .dock-thumb { width: 45px; height: 45px; border-radius: 0.375rem; object-fit: cover; border: 1px solid var(--border); }
+    .btn-remove-thumb { background: transparent; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .btn-remove-thumb:hover { color: var(--text); }
+
+    .dock-box { background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 0.75rem; padding: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+    textarea { flex: 1; background: transparent; border: none; color: var(--text); font-size: 0.9rem; padding: 0.5rem; resize: none; max-height: 120px; outline: none; }
+    .icon-btn { background: transparent; border: none; color: var(--text-muted); padding: 0.5rem; border-radius: 0.375rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .icon-btn:hover { color: var(--text); background-color: var(--surface); }
+
+    /* Library Grid */
+    .library-grid { padding: 2rem; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; flex: 1; }
+    .lib-card { background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    /* Camera & Onboarding Modals */
+    .modal-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(8px); }
+    .modal-box { background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; max-width: 500px; width: 90%; display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+    
+    .onboarding-box { background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; max-width: 680px; width: 90%; display: flex; flex-direction: column; gap: 1.75rem; }
+    .onboarding-step { display: none; flex-direction: column; gap: 1.25rem; }
+    .onboarding-step.active { display: flex; }
+    
+    .lang-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
+    @media (max-width: 600px) { .lang-card-grid { grid-template-columns: repeat(2, 1fr); } }
+    .lang-card { background-color: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.85rem; cursor: pointer; text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); transition: all 0.15s; }
+    .lang-card:hover, .lang-card.selected { border-color: var(--primary); background-color: var(--primary-muted); color: #4ade80; }
+
+    .role-card-list { display: flex; flex-direction: column; gap: 0.85rem; }
+    .role-card { background-color: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; cursor: pointer; display: flex; align-items: center; gap: 1rem; transition: all 0.15s; }
+    .role-card:hover, .role-card.selected { border-color: var(--primary); background-color: var(--primary-muted); }
+
+    video { width: 100%; border-radius: 0.5rem; background-color: #000; height: 300px; object-fit: cover; }
+  </style>
+</head>
+<body>
+
+  <!-- ONBOARDING WIZARD MODAL -->
+  <div id="onboardingModal" class="modal-overlay" style="display: none;">
+    <div class="onboarding-box">
+      <!-- Header -->
+      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+        <div class="brand-logo">
+          <i data-lucide="sprout" class="icon" style="color: #4ade80;"></i>
+          Kokodiv Setup
+        </div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);" id="onboardingStepCounter">Step 1 of 3</div>
+      </div>
+
+      <!-- STEP 1: Language Selection -->
+      <div class="onboarding-step active" id="onboardStep1">
+        <div>
+          <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.35rem;">Choose Your Language</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Select the language you want your farm assistant to speak.</p>
+        </div>
+        
+        <div class="lang-card-grid">
+          <div class="lang-card selected" onclick="selectOnboardingLang('en', this)">English</div>
+          <div class="lang-card" onclick="selectOnboardingLang('yo', this)">Èdè Yorùbá</div>
+          <div class="lang-card" onclick="selectOnboardingLang('ha', this)">Harshen Hausa</div>
+          <div class="lang-card" onclick="selectOnboardingLang('ig', this)">Asụsụ Igbo</div>
+          <div class="lang-card" onclick="selectOnboardingLang('pcm', this)">WA Pidgin</div>
+          <div class="lang-card" onclick="selectOnboardingLang('fr', this)">Français</div>
+          <div class="lang-card" onclick="selectOnboardingLang('sw', this)">Kiswahili</div>
+          <div class="lang-card" onclick="selectOnboardingLang('pt', this)">Português</div>
+          <div class="lang-card" onclick="selectOnboardingLang('ar', this)">العربية</div>
+        </div>
+
+        <button class="btn-primary" style="margin-top: 1rem; width: 100%; justify-content: center; padding: 0.85rem;" onclick="nextOnboardingStep(2)">
+          Continue <i data-lucide="arrow-right" class="icon"></i>
+        </button>
+      </div>
+
+      <!-- STEP 2: Role Selection -->
+      <div class="onboarding-step" id="onboardStep2">
+        <div>
+          <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.35rem;">What is your role?</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">How will you use your farm assistant?</p>
+        </div>
+
+        <div class="role-card-list">
+          <div class="role-card selected" onclick="selectOnboardingRole('farmer', this)">
+            <i data-lucide="user-check" class="icon" style="color: #4ade80;"></i>
+            <div>
+              <div style="font-size: 0.95rem; font-weight: 700;">Cocoa Farmer</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Quick plant doctor, pod treatment steps, and harvest advice.</div>
+            </div>
+          </div>
+          <div class="role-card" onclick="selectOnboardingRole('officer', this)">
+            <i data-lucide="briefcase" class="icon" style="color: #4ade80;"></i>
+            <div>
+              <div style="font-size: 0.95rem; font-weight: 700;">Field Extension Officer</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Help multiple farms, reference disease guides, and teach farmers.</div>
+            </div>
+          </div>
+          <div class="role-card" onclick="selectOnboardingRole('researcher', this)">
+            <i data-lucide="microscope" class="icon" style="color: #4ade80;"></i>
+            <div>
+              <div style="font-size: 0.95rem; font-weight: 700;">Agronomist / Researcher</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted);">Detailed plant disease research and scientific field data.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+          <button class="btn-secondary" style="flex: 1; justify-content: center;" onclick="nextOnboardingStep(1)">Back</button>
+          <button class="btn-primary" style="flex: 2; justify-content: center;" onclick="nextOnboardingStep(3)">Continue <i data-lucide="arrow-right" class="icon"></i></button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Field Orientation & Completion -->
+      <div class="onboarding-step" id="onboardStep3">
+        <div>
+          <h2 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.35rem;">You are ready!</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Kokodiv works 100% offline anywhere on your farm.</p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem; background: var(--surface); border: 1px solid var(--border); padding: 1.25rem; border-radius: 0.5rem;">
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <i data-lucide="camera" class="icon" style="color: #4ade80;"></i>
+            <span style="font-size: 0.875rem;"><strong>Snap Photos:</strong> Show your camera a sick pod or leaf for quick answers.</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <i data-lucide="message-square" class="icon" style="color: #4ade80;"></i>
+            <span style="font-size: 0.875rem;"><strong>Ask Farm Questions:</strong> Ask about soil, pruning, and cocoa tree care.</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <i data-lucide="shield-check" class="icon" style="color: #4ade80;"></i>
+            <span style="font-size: 0.875rem;"><strong>No Internet Needed:</strong> Runs directly on your device CPU.</span>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+          <button class="btn-secondary" style="flex: 1; justify-content: center;" onclick="nextOnboardingStep(2)">Back</button>
+          <button class="btn-primary" style="flex: 2; justify-content: center; padding: 0.85rem;" onclick="completeOnboarding()">
+            Start Doctor <i data-lucide="check" class="icon"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 1: LANDING PAGE -->
+  <div id="pageLanding" class="page-view active">
+    <div class="landing-container">
+      <nav class="landing-nav">
+        <div class="brand-logo">
+          <i data-lucide="sprout" class="icon" style="color: #4ade80;"></i>
+          Kokodiv
+        </div>
+        <div class="nav-links">
+          <span class="nav-link" id="lblNavWorkstation" onclick="openAppTab('chat')">Farm Assistant</span>
+          <span class="nav-link" id="lblNavLibrary" onclick="openAppTab('library')">Treatment Guide</span>
+          <span class="nav-link" id="lblNavSettings" onclick="openAppTab('settings')">App Settings</span>
+          <button class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;" onclick="openAppTab('chat')">
+            <i data-lucide="play" class="icon"></i> <span id="lblBtnLaunch">Start Doctor</span>
+          </button>
+        </div>
+      </nav>
+
+      <section class="hero-section">
+        <div class="hero-badge">
+          <i data-lucide="shield-check" class="icon"></i> Offline Cocoa Doctor
+        </div>
+        <h1 class="hero-title" id="lblHeroTitle">Offline Cocoa Farm Doctor</h1>
+        <p class="hero-desc" id="lblHeroDesc">
+          Diagnose plant diseases, get simple treatment steps, and ask questions about your cocoa trees—without needing internet connection.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="openAppTab('chat')">
+            <i data-lucide="message-square" class="icon"></i> <span id="lblHeroLaunch">Start Doctor</span>
+          </button>
+          <button class="btn-secondary" onclick="openAppTab('library')">
+            <i data-lucide="book-open" class="icon"></i> <span id="lblHeroBrowse">Treatment Guide</span>
+          </button>
+        </div>
+      </section>
+
+      <div class="grid-features">
+        <div class="feature-card">
+          <div class="feature-icon-box"><i data-lucide="zap" class="icon"></i></div>
+          <div class="feature-title" id="lblFeat1Title">Instant Photo Diagnosis</div>
+          <div class="feature-desc" id="lblFeat1Desc">Snap a photo of a sick pod or leaf to find the disease in seconds.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-box"><i data-lucide="languages" class="icon"></i></div>
+          <div class="feature-title" id="lblFeat2Title">Speaks Your Language</div>
+          <div class="feature-desc" id="lblFeat2Desc">Simple advice in Yoruba, Hausa, Igbo, Pidgin, French, Swahili, Portuguese, Arabic, and English.</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-box"><i data-lucide="database" class="icon"></i></div>
+          <div class="feature-title" id="lblFeat3Title">Verified Treatment Steps</div>
+          <div class="feature-desc" id="lblFeat3Desc">Approved agricultural guides from cocoa research experts.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: APP WORKSTATION -->
+  <div id="pageApp" class="page-view">
+    <div class="app-container">
+      <!-- Left Sidebar -->
+      <div class="sidebar">
+        <div class="brand-logo" style="margin-bottom: 1rem; cursor: pointer;" onclick="showLandingPage()">
+          <i data-lucide="sprout" class="icon" style="color: #4ade80;"></i>
+          Kokodiv
+        </div>
+
+        <button class="btn-new" onclick="startNewSession()">
+          <i data-lucide="plus" class="icon"></i> <span id="lblBtnNewSession">New Question</span>
+        </button>
+
+        <div class="nav-group-title" id="lblSidebarNav">Navigation</div>
+        <div class="nav-item active" id="navChat" onclick="openAppTab('chat')">
+          <i data-lucide="message-square" class="icon"></i> <span id="lblNavChat">Farm Assistant</span>
+        </div>
+        <div class="nav-item" id="navLib" onclick="openAppTab('library')">
+          <i data-lucide="book-open" class="icon"></i> <span id="lblNavLib">Treatment Guide</span>
+        </div>
+        <div class="nav-item" id="navSettings" onclick="openAppTab('settings')">
+          <i data-lucide="settings" class="icon"></i> <span id="lblNavSett">App Settings</span>
+        </div>
+
+        <div class="nav-group-title" style="margin-top: 1rem;" id="lblSidebarThreads">Past Questions</div>
+        <div class="session-list" id="sessionList"></div>
+
+        <div style="padding-top: 1rem; border-top: 1px solid var(--border); margin-top: auto;">
+          <div class="nav-group-title" style="padding:0; margin-bottom:0.25rem;" id="lblSidebarLang">Language</div>
+          <select id="langSelect" class="lang-dropdown" onchange="updateLanguage()" style="width:100%; background:var(--surface); color:var(--text); border:1px solid var(--border); padding:0.5rem; border-radius:0.375rem; font-size:0.85rem;">
+            <option value="en">English</option>
+            <option value="yo">Yoruba (Èdè Yorùbá)</option>
+            <option value="ha">Hausa (Harshen Hausa)</option>
+            <option value="ig">Igbo (Asụsụ Igbo)</option>
+            <option value="pcm">West African Pidgin</option>
+            <option value="fr">French (Français)</option>
+            <option value="ar">Arabic (العربية)</option>
+            <option value="pt">Portuguese (Português)</option>
+            <option value="sw">Swahili (Kiswahili)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Right Workspace -->
+      <div class="main-workspace">
+        <div class="top-header">
+          <div style="font-size: 1rem; font-weight: 600;" id="workspaceTitle">Cocoa Doctor & Farm Assistant</div>
+          <div style="background:var(--primary-muted); color:#4ade80; padding:0.2rem 0.6rem; border-radius:0.25rem; font-size:0.75rem; font-weight:600; border:1px solid rgba(34,197,94,0.3);" id="lblBadgeOffline">
+            Works Without Internet
+          </div>
+        </div>
+
+        <!-- Chat Workspace Tab -->
+        <div id="tabChat" class="page-view active" style="flex-direction: column; flex: 1;">
+          <div class="chat-stream" id="chatStream">
+            <div class="msg-row assistant">
+              <div class="msg-bubble" id="welcomeBubble">
+                <strong>Kokodiv Offline Cocoa Doctor</strong><br>
+                • Ask any question about your cocoa trees, soil, pruning, or pod diseases.<br>
+                • Snap or attach a photo of a sick pod or leaf for quick disease diagnosis.
+              </div>
+            </div>
+          </div>
+
+          <div class="dock-container">
+            <div id="attachmentPreview" class="preview-container" style="display: none;">
+              <img id="dockImagePreview" class="dock-thumb" alt="Snapped Photo Preview">
+              <span style="font-size: 0.8rem; color: var(--text-muted);" id="lblPhotoAttached">Photo attached</span>
+              <button class="btn-remove-thumb" title="Remove Photo" onclick="removeAttachment()">
+                <i data-lucide="x" class="icon" style="width: 1rem; height: 1rem;"></i>
+              </button>
+            </div>
+
+            <div class="dock-box">
+              <button class="icon-btn" title="Live Camera Viewfinder" onclick="openCameraModal()">
+                <i data-lucide="camera" class="icon"></i>
+              </button>
+              <button class="icon-btn" title="Attach Image File" onclick="document.getElementById('fileInput').click()">
+                <i data-lucide="paperclip" class="icon"></i>
+              </button>
+              <input type="file" id="fileInput" accept="image/*" style="display: none;" onchange="handleFileSelect(event)">
+              
+              <textarea id="chatInput" rows="1" placeholder="Ask a question about your farm or show a photo..." onkeydown="handleKeyDown(event)"></textarea>
+              <button class="btn-primary" style="padding: 0.5rem 1rem;" onclick="sendMessage()">
+                <i data-lucide="send" class="icon"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Library Tab -->
+        <div id="tabLib" class="page-view" style="flex: 1;">
+          <div class="library-grid" id="libraryContainer"></div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="tabSettings" class="page-view" style="flex: 1; padding: 2rem; flex-direction: column; gap: 1.5rem;">
+          <h2 style="font-size: 1.25rem; font-weight: 700;" id="lblSettingsHeading">App Status</h2>
+          <div style="background:var(--sidebar); border:1px solid var(--border); border-radius:0.5rem; padding:1.5rem; display:flex; flex-direction:column; gap:1rem; max-width:600px;">
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border); padding-bottom:0.75rem;">
+              <span>Photo Classifier</span>
+              <span style="color:#4ade80; font-weight:600;">Ready</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; border-bottom:1px solid var(--border); padding-bottom:0.75rem;">
+              <span>Disease Guide Database</span>
+              <span style="color:#4ade80; font-weight:600;">Ready</span>
+            </div>
+            <div style="display:flex; justify-content:space-between;">
+              <span>Local AI Doctor</span>
+              <span style="color:#4ade80; font-weight:600;">Ready</span>
+            </div>
+            <button class="btn-secondary" style="margin-top: 0.5rem; justify-content: center;" onclick="reRunOnboarding()">
+              <i data-lucide="refresh-cw" class="icon"></i> Change Language / Role Setup
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live Camera Viewfinder Modal -->
+  <div id="cameraModal" class="modal-overlay">
+    <div class="modal-box">
+      <div style="width:100%; display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-weight: 700;" id="lblCameraModalTitle">Live Camera</span>
+        <button class="icon-btn" onclick="closeCameraModal()">
+          <i data-lucide="x" class="icon"></i>
+        </button>
+      </div>
+      <video id="webcamVideo" autoplay playsinline></video>
+      <div style="display:flex; gap:1rem; width:100%;">
+        <button class="btn-primary" style="flex:1; justify-content:center;" onclick="captureCameraPhoto()" id="lblBtnSnap">Snap Photo</button>
+        <button class="btn-secondary" style="flex:1; justify-content:center;" onclick="closeCameraModal()" id="lblBtnCancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="snapshotCanvas" style="display: none;"></canvas>
+
+  <script>
+    let currentSessionId = null;
+    let currentBase64Image = null;
+    let videoStream = null;
+
+    let selectedOnboardLang = "en";
+    let selectedOnboardRole = "farmer";
+
+    const UI_TRANSLATIONS = {
+      en: {
+        newSession: "New Question",
+        navTitle: "Navigation",
+        chatTitle: "Farm Assistant",
+        libTitle: "Treatment Guide",
+        settTitle: "App Settings",
+        threadsTitle: "Past Questions",
+        targetLang: "Language",
+        workstationHeading: "Cocoa Doctor & Farm Assistant",
+        offlineEngine: "Works Without Internet",
+        welcomeBubble: "<strong>Kokodiv Offline Cocoa Doctor</strong><br>• Ask any question about your cocoa trees, soil, pruning, or pod diseases.<br>• Snap or attach a photo of a sick pod or leaf for quick disease diagnosis.",
+        placeholder: "Ask a question about your farm or show a photo...",
+        photoAttached: "Photo attached",
+        launchApp: "Start Doctor",
+        heroTitle: "Offline Cocoa Farm Doctor",
+        heroDesc: "Diagnose plant diseases, get simple treatment steps, and ask questions about your cocoa trees—without needing internet connection.",
+        feat1Title: "Instant Photo Diagnosis",
+        feat1Desc: "Snap a photo of a sick pod or leaf to find the disease in seconds.",
+        feat2Title: "Speaks Your Language",
+        feat2Desc: "Simple advice in Yoruba, Hausa, Igbo, Pidgin, French, Swahili, Portuguese, Arabic, and English.",
+        feat3Title: "Verified Treatment Steps",
+        feat3Desc: "Approved agricultural guides from cocoa research experts."
+      },
+      yo: {
+        newSession: "Ìbéèrè Titun",
+        navTitle: "Ìrìn-àjò",
+        chatTitle: "Olùrànlọ́wọ́ Agbẹ̀",
+        libTitle: "Ìwé Ìtọ́jú Àìsàn",
+        settTitle: "Àwọn Ìtoṣọ́nà Ètò",
+        threadsTitle: "Àwọn Ìbéèrè Kọjá",
+        targetLang: "Èdè",
+        workstationHeading: "Dokita Kókó & Olùrànlọ́wọ́ Agbẹ̀",
+        offlineEngine: "Kò Nílò 網絡",
+        welcomeBubble: "<strong>Dokita Kókó Aláìrínáyélujára</strong><br>• Bèrè ìbéèrè eyikeyi nípa kókó rẹ, ilẹ̀, tàbí àìsàn eso.<br>• Ya àwòrán eso tàbí ewé ti ó ṣàìsàn fún ìdánimọ̀ lẹ́sẹ̀kẹsẹ̀.",
+        placeholder: "Bèrè ìbéèrè nípa agbẹ̀ rẹ tàbí fi àwòrán hàn...",
+        photoAttached: "A so àwòrán pọ̀",
+        launchApp: "Bẹ̀rẹ̀ Dokita",
+        heroTitle: "Dokita Agbẹ̀ Kókó Aláìrínáyélujára",
+        heroDesc: "Mọ̀ àwọn àìsàn kókó, gba àwọn ìtọ́jú rọrùn ni èdè rẹ nírọ̀rùn.",
+        feat1Title: "Ìdánimọ̀ Àwòrán Lẹ́sẹ̀kẹsẹ̀",
+        feat1Desc: "Ya àwòrán eso tàbí ewé ti ó ṣàìsàn fún ìdánimọ̀ ni ìṣẹ́jú àáyá.",
+        feat2Title: "Sọ̀rọ̀ ni Èdè Rẹ",
+        feat2Desc: "Ìmọ̀ràn rọrùn ni Èdè Yorùbá, Hausa, Igbo, Pidgin, Faranse, Swahili, Portugese, Arabiki, ati Geesi.",
+        feat3Title: "Àwọn Ìtọ́jú ti a Fowọ́sowọ́pọ̀",
+        feat3Desc: "Ìtọ́jú ti àwọn onímọ̀ agbẹ̀ kókó fowọ́sí."
+      },
+      ha: {
+        newSession: "Sabon Tambaya",
+        navTitle: "Zewayen Neman Wuri",
+        chatTitle: "Mai Taimakawa Manomi",
+        libTitle: "Jagorar Magani",
+        settTitle: "Saitunan Tsarin",
+        threadsTitle: "Tambayoyin Baya",
+        targetLang: "Harshe",
+        workstationHeading: "Likitancin Koko da Mai Taimako",
+        offlineEngine: "Ba ya Neman Yanar Gizo",
+        welcomeBubble: "<strong>Likitancin Koko Na Yanar Gizo</strong><br>• Tambayi kowace tambaya game da bishiyar koko, ƙasa, ko cututtuka.<br>• Ɗauki hoton kwasfa ko ganye mara lafiya don gano cutar nan take.",
+        placeholder: "Yi tambaya game da gonarka ko nuna hoto...",
+        photoAttached: "An haɗa hoto",
+        launchApp: "Fara Likita",
+        heroTitle: "Likitan Gonar Koko Na Na'ura",
+        heroDesc: "Gano cututtukan shuka kuma samun hanyoyin jiyya a cikin harshenku cikin sauƙi.",
+        feat1Title: "Gano Hoto Nan Take",
+        feat1Desc: "Ɗauki hoton kwasfa ko ganye mara lafiya don gano cutar a cikin daƙiƙa.",
+        feat2Title: "Yana Magana da Harshenka",
+        feat2Desc: "Shawarwari cikin Hausa, Yoruba, Igbo, Pidgin, Faransanci, da Turanci.",
+        feat3Title: "Matakan Jiyya Tabbatattu",
+        feat3Desc: "Jagororin aikin gona da aka amince da su daga masana."
+      },
+      ig: {
+        newSession: "Ajụjụ Ọhụrụ",
+        navTitle: "Nchọgharị",
+        chatTitle: "Onye Enyemaka Ugbo",
+        libTitle: "Akwụkwọ Ọgwụgwọ",
+        settTitle: "Ntọala Sistemu",
+        threadsTitle: "Ajụjụ Gara Aga",
+        targetLang: "Asụsụ",
+        workstationHeading: "Dọkịta Kooko na Onye Enyemaka Ugbo",
+        offlineEngine: "Anaghị Eji Inthanet",
+        welcomeBubble: "<strong>Dọkịta Kooko Na-arụ n'Anaghị Inthanet</strong><br>• Jụọ ajụjụ ist n'akụkụ kooko gị, ala, ma ọ bụ arịa.<br>• Sere foto nke mkpụrụ ma ọ bụ akwụkwọ nwere arịa maka nyocha ngwa ngwa.",
+        placeholder: "Jụọ ajụjụ gbasara ugbo gị ma ọ bụ gosi foto...",
+        photoAttached: "E tinyere foto",
+        launchApp: "Bido Dọkịta",
+        heroTitle: "Dọkịta Ugbo Kooko n'Anaghị Inthanet",
+        heroDesc: "Chọpụta arịa na-aria kooko ma nweta ọgwụgwọ n'asụsụ gị n'ụzọ dị mfe.",
+        feat1Title: "Nyocha Foto Ngwa Ngwa",
+        feat1Desc: "Sere foto mkpụrụ ma ọ bụ akwụkwọ nwere arịa iji chọpụta ya na sekọnd.",
+        feat2Title: "Na-asụ Asụsụ Gị",
+        feat2Desc: "Ndụmọdụ dị mfe na Igbo, Yoruba, Hausa, Pidgin, na Bekee.",
+        feat3Title: "Usoro Ọgwụgwọ A Kwadoro",
+        feat3Desc: "Ntụziaka ndị ọkachamara n'ọrụ ugbo kooko kwadoro."
+      },
+      pcm: {
+        newSession: "New Question",
+        navTitle: "Navigation",
+        chatTitle: "Farm Assistant",
+        libTitle: "Treatment Guide",
+        settTitle: "App Settings",
+        threadsTitle: "Past Questions",
+        targetLang: "Language",
+        workstationHeading: "Cocoa Doctor & Farm Assistant",
+        offlineEngine: "No Need Internet",
+        welcomeBubble: "<strong>Kokodiv Offline Cocoa Doctor</strong><br>• Ask any question about your cocoa trees, soil, or sick pods.<br>• Snap photo of sick pod or leaf to know the disease immediately.",
+        placeholder: "Ask question about your farm or show photo...",
+        photoAttached: "Photo don attach",
+        launchApp: "Start Doctor",
+        heroTitle: "Offline Cocoa Farm Doctor",
+        heroDesc: "Diagnose plant disease and get simple treatment steps in your language without internet.",
+        feat1Title: "Sharp Sharp Photo Doctor",
+        feat1Desc: "Snap photo of sick pod or leaf make you find the disease fast fast.",
+        feat2Title: "Dey Talk Your Language",
+        feat2Desc: "Simple advice for Pidgin, Yoruba, Hausa, Igbo, French, English.",
+        feat3Title: "Confirmed Treatment Steps",
+        feat3Desc: "Original agricultural steps from cocoa research experts."
+      },
+      fr: {
+        newSession: "Nouvelle Question",
+        navTitle: "Navigation",
+        chatTitle: "Assistant Agricole",
+        libTitle: "Guide des Traitements",
+        settTitle: "Paramètres App",
+        threadsTitle: "Questions Passées",
+        targetLang: "Langue",
+        workstationHeading: "Docteur Cacao & Assistant Agricole",
+        offlineEngine: "Sans Internet",
+        welcomeBubble: "<strong>Docteur Cacao Hors-Ligne Kokodiv</strong><br>• Posez vos questions sur vos cacaoyers, le sol ou les maladies.<br>• Prenez une photo d'une cabosse ou feuille malade pour un diagnostic rapide.",
+        placeholder: "Posez une question sur votre plantation ou montrez une photo...",
+        photoAttached: "Photo jointe",
+        launchApp: "Lancer le Docteur",
+        heroTitle: "Docteur Agricole du Cacao Hors-Ligne",
+        heroDesc: "Diagnostiquez les maladies et obtenez des conseils simples sans connexion internet.",
+        feat1Title: "Diagnostic Photo Instantané",
+        feat1Desc: "Prenez une photo d'une cabosse ou feuille malade pour un résultat rapide.",
+        feat2Title: "Parle Votre Langue",
+        feat2Desc: "Conseils simples en français, yoruba, haoussa, igbo, pidgin, anglais.",
+        feat3Title: "Traitements Homologués",
+        feat3Desc: "Guides agricoles approuvés par les experts du cacao."
+      },
+      ar: {
+        newSession: "سؤال جديد",
+        navTitle: "التنقل",
+        chatTitle: "المساعد الزراعي",
+        libTitle: "دليل العلاج",
+        settTitle: "إعدادات التطبيق",
+        threadsTitle: "الأسئلة السابقة",
+        targetLang: "اللغة",
+        workstationHeading: "طبيب الكاكاو ومساعد المزرعة",
+        offlineEngine: "يعمل بدون إنترنت",
+        welcomeBubble: "<strong>طبيب الكاكاو بدون إنترنت</strong><br>• اطرح أي سؤال حول أشجار الكاكاو، التربة، أو الأمراض.<br>• التقط صورة لكبسولة أو ورقة مريضة للتشخيص السريع.",
+        placeholder: "اطرح سؤالاً عن مزرعتك أو التقط صورة...",
+        photoAttached: "تم إرفاق الصورة",
+        launchApp: "بدء الطبيب",
+        heroTitle: "طبيب مزرعة الكاكاو بدون إنترنت",
+        heroDesc: "تشخيص أمراض الكاكاو والحصول على خطوات علاج بسيطة بلغتك بدون إنترنت.",
+        feat1Title: "تشخيص فوري بالصورة",
+        feat1Desc: "التقط صورة لكبسولة أو ورقة مريضة لمعرفة المرض في ثوانٍ.",
+        feat2Title: "يتحدث بلغتك",
+        feat2Desc: "نصائح بسيطة باللغات العربية، الإنجليزية، والفرنسية.",
+        feat3Title: "خطوات علاج معتمدة",
+        feat3Desc: "أدلة زراعية معتمدة من خبراء أبحاث الكاكاو."
+      },
+      pt: {
+        newSession: "Nova Pergunta",
+        navTitle: "Navegação",
+        chatTitle: "Assistente Agrícola",
+        libTitle: "Guia de Tratamentos",
+        settTitle: "Configurações",
+        threadsTitle: "Perguntas Anteriores",
+        targetLang: "Idioma",
+        workstationHeading: "Doutor do Cacau & Assistente",
+        offlineEngine: "Sem Internet",
+        welcomeBubble: "<strong>Doutor do Cacau Offline Kokodiv</strong><br>• Faça perguntas sobre cacaueiros, solo ou frutos doentes.<br>• Tire uma foto do fruto doente para diagnóstico rápido.",
+        placeholder: "Faça uma pergunta sobre sua roça ou mostre uma foto...",
+        photoAttached: "Foto anexada",
+        launchApp: "Iniciar Doutor",
+        heroTitle: "Doutor do Cacau Offline",
+        heroDesc: "Diagnostique doenças de plantas e receba passos simples de tratamento sem precisar de internet.",
+        feat1Title: "Diagnóstico por Foto Instantâneo",
+        feat1Desc: "Tire uma foto de um fruto doente para descobrir a doença em segundos.",
+        feat2Title: "Fala a Sua Língua",
+        feat2Desc: "Conselhos simples em português, francês, inglês e línguas africanas.",
+        feat3Title: "Passos de Tratamento Verificados",
+        feat3Desc: "Guias agrícolas aprovados por especialistas em cacau."
+      },
+      sw: {
+        newSession: "Swali Kipya",
+        navTitle: "Urambazaji",
+        chatTitle: "Msaidizi wa Shamba",
+        libTitle: "Mwongozo wa Matibabu",
+        settTitle: "Mipangilio",
+        threadsTitle: "Maswali ya Nyuma",
+        targetLang: "Lugha",
+        workstationHeading: "Daktari wa Kakao & Msaidizi",
+        offlineEngine: "Bila Intaneti",
+        welcomeBubble: "<strong>Daktari wa Kakao Asiye na Intaneti</strong><br>• Uliza swali lolote kuhusu miti ya kakao, udongo, au magonjwa.<br>• Piga picha ya tunda au jani mgonjwa kwa utambuzi wa haraka.",
+        placeholder: "Uliza swali kuhusu shamba lako au onyesha picha...",
+        photoAttached: "Picha imeambatanishwa",
+        launchApp: "Anzisha Daktari",
+        heroTitle: "Daktari wa Shamba la Kakao Bila Intaneti",
+        heroDesc: "Tambua magonjwa ya kakao na upate mbinu rahisi za matibabu kwa lugha yako.",
+        feat1Title: "Utambuzi wa Picha wa Haraka",
+        feat1Desc: "Piga picha ya tunda au jani mgonjwa ili kujua ugonjwa kwa sekunde.",
+        feat2Title: "Inazungumza Lugha Yako",
+        feat2Desc: "Ushauri rahisi kwa Kiswahili, Kiingereza, na Kifaransa.",
+        feat3Title: "Hatua za Matibabu Zilizothibitishwa",
+        feat3Desc: "Miongozo ya kilimo iliyoidhinishwa na wataalamu wa kakao."
+      }
+    };
+
+    function initLucide() {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function selectOnboardingLang(lang, el) {
+      selectedOnboardLang = lang;
+      document.querySelectorAll(".lang-card").forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+      document.getElementById("langSelect").value = lang;
+      updateLanguage();
+    }
+
+    function selectOnboardingRole(role, el) {
+      selectedOnboardRole = role;
+      document.querySelectorAll(".role-card").forEach(c => c.classList.remove("selected"));
+      el.classList.add("selected");
+    }
+
+    function nextOnboardingStep(stepNum) {
+      document.querySelectorAll(".onboarding-step").forEach(s => s.classList.remove("active"));
+      document.getElementById(`onboardStep${stepNum}`).classList.add("active");
+      document.getElementById("onboardingStepCounter").innerText = `Step ${stepNum} of 3`;
+      initLucide();
+    }
+
+    function completeOnboarding() {
+      localStorage.setItem("kokodiv_onboarded", "true");
+      localStorage.setItem("kokodiv_lang", selectedOnboardLang);
+      localStorage.setItem("kokodiv_role", selectedOnboardRole);
+      document.getElementById("onboardingModal").style.display = "none";
+      openAppTab("chat");
+    }
+
+    function reRunOnboarding() {
+      document.getElementById("onboardingModal").style.display = "flex";
+      nextOnboardingStep(1);
+    }
+
+    function checkOnboarding() {
+      const onboarded = localStorage.getItem("kokodiv_onboarded");
+      if (!onboarded) {
+        document.getElementById("onboardingModal").style.display = "flex";
+        nextOnboardingStep(1);
+      } else {
+        document.getElementById("onboardingModal").style.display = "none";
+        const savedLang = localStorage.getItem("kokodiv_lang") || "en";
+        document.getElementById("langSelect").value = savedLang;
+        updateLanguage();
+      }
+    }
+
+    function showLandingPage() {
+      document.querySelectorAll(".page-view").forEach(p => p.classList.remove("active"));
+      document.getElementById("pageLanding").classList.add("active");
+    }
+
+    function openAppTab(tab) {
+      document.querySelectorAll(".page-view").forEach(p => p.classList.remove("active"));
+      document.getElementById("pageApp").classList.add("active");
+
+      document.getElementById("tabChat").classList.remove("active");
+      document.getElementById("tabLib").classList.remove("active");
+      document.getElementById("tabSettings").classList.remove("active");
+
+      document.getElementById("navChat").classList.remove("active");
+      document.getElementById("navLib").classList.remove("active");
+      document.getElementById("navSettings").classList.remove("active");
+
+      if (tab === 'chat') {
+        document.getElementById("tabChat").classList.add("active");
+        document.getElementById("navChat").classList.add("active");
+      } else if (tab === 'library') {
+        document.getElementById("tabLib").classList.add("active");
+        document.getElementById("navLib").classList.add("active");
+        loadCRINManual();
+      } else if (tab === 'settings') {
+        document.getElementById("tabSettings").classList.add("active");
+        document.getElementById("navSettings").classList.add("active");
+      }
+      initLucide();
+    }
+
+    function updateLanguage() {
+      const lang = document.getElementById("langSelect").value;
+      const dict = UI_TRANSLATIONS[lang] || UI_TRANSLATIONS['en'];
+
+      if (lang === 'ar') {
+        document.body.dir = "rtl";
+      } else {
+        document.body.dir = "ltr";
+      }
+
+      document.getElementById("lblBtnNewSession").innerText = dict.newSession;
+      document.getElementById("lblSidebarNav").innerText = dict.navTitle;
+      document.getElementById("lblNavChat").innerText = dict.chatTitle;
+      document.getElementById("lblNavLib").innerText = dict.libTitle;
+      document.getElementById("lblNavSett").innerText = dict.settTitle;
+      document.getElementById("lblSidebarThreads").innerText = dict.threadsTitle;
+      document.getElementById("lblSidebarLang").innerText = dict.targetLang;
+      document.getElementById("workspaceTitle").innerText = dict.workstationHeading;
+      document.getElementById("lblBadgeOffline").innerText = dict.offlineEngine;
+      document.getElementById("welcomeBubble").innerHTML = dict.welcomeBubble;
+      document.getElementById("chatInput").placeholder = dict.placeholder;
+      document.getElementById("lblPhotoAttached").innerText = dict.photoAttached;
+
+      document.getElementById("lblBtnLaunch").innerText = dict.launchApp;
+      document.getElementById("lblHeroTitle").innerText = dict.heroTitle;
+      document.getElementById("lblHeroDesc").innerText = dict.heroDesc;
+      document.getElementById("lblHeroLaunch").innerText = dict.workstationHeading;
+      document.getElementById("lblHeroBrowse").innerText = dict.libTitle;
+      document.getElementById("lblNavWorkstation").innerText = dict.workstationHeading;
+      document.getElementById("lblNavLibrary").innerText = dict.libTitle;
+      document.getElementById("lblNavSettings").innerText = dict.settTitle;
+
+      // Update 3 Feature Cards
+      document.getElementById("lblFeat1Title").innerText = dict.feat1Title;
+      document.getElementById("lblFeat1Desc").innerText = dict.feat1Desc;
+      document.getElementById("lblFeat2Title").innerText = dict.feat2Title;
+      document.getElementById("lblFeat2Desc").innerText = dict.feat2Desc;
+      document.getElementById("lblFeat3Title").innerText = dict.feat3Title;
+      document.getElementById("lblFeat3Desc").innerText = dict.feat3Desc;
+
+      loadCRINManual();
+      initLucide();
+    }
+
+    function showAttachmentPreview(base64Data) {
+      currentBase64Image = base64Data;
+      const previewBox = document.getElementById("attachmentPreview");
+      const thumb = document.getElementById("dockImagePreview");
+      if (previewBox && thumb) {
+        thumb.src = base64Data;
+        previewBox.style.display = "flex";
+      }
+      initLucide();
+    }
+
+    function removeAttachment() {
+      currentBase64Image = null;
+      const previewBox = document.getElementById("attachmentPreview");
+      if (previewBox) {
+        previewBox.style.display = "none";
+      }
+      document.getElementById("fileInput").value = "";
+    }
+
+    async function startNewSession() {
+      try {
+        const lang = document.getElementById("langSelect").value;
+        const res = await fetch("/api/chat/sessions", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ title: "Farm Consultation", language: lang })
+        });
+        const data = await res.json();
+        currentSessionId = data.session_id;
+        
+        const dict = UI_TRANSLATIONS[lang] || UI_TRANSLATIONS['en'];
+        document.getElementById("chatStream").innerHTML = `
+          <div class="msg-row assistant">
+            <div class="msg-bubble">
+              ${dict.welcomeBubble}
+            </div>
+          </div>
+        `;
+        loadSessions();
+      } catch (err) {}
+    }
+
+    async function loadSessions() {
+      try {
+        const res = await fetch("/api/chat/sessions");
+        const data = await res.json();
+        const container = document.getElementById("sessionList");
+        container.innerHTML = "";
+        
+        if (data.sessions && data.sessions.length > 0) {
+          data.sessions.forEach(s => {
+            const div = document.createElement("div");
+            div.className = `nav-item ${s.session_id === currentSessionId ? 'active' : ''}`;
+            div.innerText = s.title;
+            div.onclick = () => selectSession(s.session_id, s.title);
+            container.appendChild(div);
+          });
+        }
+      } catch (err) {}
+    }
+
+    async function selectSession(sessionId, title) {
+      currentSessionId = sessionId;
+      loadSessions();
+
+      try {
+        const res = await fetch(`/api/chat/messages?session_id=${sessionId}`);
+        const data = await res.json();
+        const stream = document.getElementById("chatStream");
+        stream.innerHTML = "";
+
+        if (data.messages) {
+          data.messages.forEach(m => {
+            appendMessage(m.role, m.content);
+          });
+        }
+      } catch (err) {}
+    }
+
+    function appendMessage(role, content, imageBase64 = null) {
+      const stream = document.getElementById("chatStream");
+      const row = document.createElement("div");
+      row.className = `msg-row ${role}`;
+      
+      const bubble = document.createElement("div");
+      bubble.className = "msg-bubble";
+
+      if (imageBase64) {
+        const img = document.createElement("img");
+        img.src = imageBase64;
+        img.className = "msg-img";
+        bubble.appendChild(img);
+      }
+
+      const textDiv = document.createElement("div");
+      textDiv.innerHTML = content.replace(/\n/g, "<br>");
+      bubble.appendChild(textDiv);
+
+      row.appendChild(bubble);
+      stream.appendChild(row);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        showAttachmentPreview(e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    async function openCameraModal() {
+      document.getElementById("cameraModal").style.display = "flex";
+      initLucide();
+      try {
+        videoStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        document.getElementById("webcamVideo").srcObject = videoStream;
+      } catch (err) {
+        alert("Camera access error: " + err.message);
+        closeCameraModal();
+      }
+    }
+
+    function closeCameraModal() {
+      if (videoStream) {
+        videoStream.getTracks().forEach(t => t.stop());
+        videoStream = null;
+      }
+      document.getElementById("cameraModal").style.display = "none";
+    }
+
+    function captureCameraPhoto() {
+      const video = document.getElementById("webcamVideo");
+      const canvas = document.getElementById("snapshotCanvas");
+      canvas.width = video.videoWidth || 640;
+      canvas.height = video.videoHeight || 480;
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      const capturedData = canvas.toDataURL("image/jpeg");
+      showAttachmentPreview(capturedData);
+      closeCameraModal();
+    }
+
+    function handleKeyDown(event) {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    }
+
+    async function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const text = input.value.trim();
+      if (!text && !currentBase64Image) return;
+
+      if (!currentSessionId) {
+        await startNewSession();
+      }
+
+      const imgToSend = currentBase64Image;
+      appendMessage("user", text || "[Photo Sent]", imgToSend);
+
+      input.value = "";
+      removeAttachment();
+
+      try {
+        const lang = document.getElementById("langSelect").value;
+        const res = await fetch("/api/diagnose", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            session_id: currentSessionId,
+            user_text: text,
+            language: lang,
+            image_base64: imgToSend
+          })
+        });
+
+        const data = await res.json();
+        appendMessage("assistant", data.response);
+      } catch (err) {
+        appendMessage("assistant", "Error executing analysis: " + err.message);
+      }
+    }
+
+    async function loadCRINManual() {
+      try {
+        const lang = document.getElementById("langSelect").value;
+        const res = await fetch(`/api/crin/manual?language=${lang}`);
+        const data = await res.json();
+        const container = document.getElementById("libraryContainer");
+        container.innerHTML = "";
+
+        if (data.manual) {
+          data.manual.forEach(d => {
+            const card = document.createElement("div");
+            card.className = "lib-card";
+            card.innerHTML = `
+              <div style="font-size:1.1rem; font-weight:700;">${d.common_name}</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); font-style:italic;">Cause: ${d.pathogen}</div>
+              <div style="font-size:0.85rem; margin-top:0.25rem;"><strong>Symptoms:</strong> ${d.symptoms}</div>
+              <div style="font-size:0.85rem; color:var(--text-muted); margin-top:0.25rem;"><strong>How to prevent:</strong> ${d.prevention}</div>
+              <div style="font-size:0.75rem; color:#4ade80; font-weight:700; margin-top:0.5rem;">CRIN Guide Ref: ${d.crin_reference}</div>
+            `;
+            container.appendChild(card);
+          });
+        }
+      } catch (err) {}
+    }
+
+    window.onload = function() {
+      initLucide();
+      checkOnboarding();
+      loadSessions();
+    };
+  </script>
+</body>
+</html>
