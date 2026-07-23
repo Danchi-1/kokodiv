@@ -216,3 +216,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Kokodiv local model downloads & temporary artifacts
+models/*.tmp
+models/*.gguf
+
