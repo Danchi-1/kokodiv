@@ -1,0 +1,686 @@
+[
+  {
+    "disease_id": "black_pod",
+    "common_name": {
+      "en": "Black Pod Disease",
+      "fr": "Maladie de la Pourriture Noire",
+      "ar": "مرض القرن الأسود",
+      "pt": "Doença da Vagem Negra",
+      "sw": "Ugonjwa wa Maganda Meusi",
+      "ha": "Cututtukan Ƙwai Baƙi",
+      "yo": "Arun Ìgbẹ́ Dúdú",
+      "ig": "Ọrịa Mkpụrụ Ojii"
+    },
+    "pathogen": "Phytophthora megakarya / Phytophthora palmivora",
+    "symptoms": {
+      "en": "Dark brown or black water-soaked lesions expanding rapidly across the cocoa pod, covered with white sporangia coating during high humidity.",
+      "fr": "Taches brunes ou noires gorgées d'eau s'étendant rapidement sur la cabosse de cacao, recouvertes d'un duvet blanc sous forte humidité.",
+      "ar": "بقع مائية داكنة أو سوداء تتوسع بسرعة عبر قرن الكاكاو، مكسوة بطبقة من الأبواغ البيضاء أثناء الرطوبة العالية.",
+      "pt": "Manchas escuras castanhas ou negras encharcadas que se expandem rapidamente pela vagem de cacau.",
+      "sw": "Madoa ya kahawia au meusi yenye maji yanayosambaa haraka kwenye ganda la kakao.",
+      "ha": "Tabo masu launin ruwan kasa ko baƙi da ke yaɗuwa cikin sauri a jikin ƙwai.",
+      "yo": "Abawọn dudu tabi ti o kun fun omi ti o n sga lori eso koko pẹlu awọn abawọn funfun.",
+      "ig": "Akara ojii ma ọ bụ nke dị ka mmiri na-agbasa ngwa ngwa n'ahụ mkpụrụ kooko."
+    },
+    "treatment": {
+      "en": [
+        "Sanitation: Remove and bury or destroy all infected pods every 3-4 days.",
+        "Chemical Spraying: Apply Ridomil Gold (Metalaxyl + Copper Hydroxide) or Nordox 75 WG at 3-week intervals during wet season.",
+        "Organic Option: Apply copper sulfate / lime Bordeaux mixture (1% solution) to pod surface."
+      ],
+      "fr": [
+        "Assainissement: Retirer et détruire immédiatement toutes les cabosses infectées tous les 3-4 jours.",
+        "Traitement Chimique: Appliquer Ridomil Gold ou Nordox 75 WG toutes les 3 semaines pendant la saison des pluies.",
+        "Option Biologique: Appliquer le mélange bordelais (sulfate de cuivre 1%)."
+      ],
+      "ar": [
+        "الصحة النباتية: إزالة وإتلاف القرون المصابة كل 3-4 أيام.",
+        "الرش الكيميائي: تطبيق Ridomil Gold أو Nordox 75 WG كل 3 أسابيع خلال الموسم المطير.",
+        "خيار عضوي: تطبيق خلطة بوردو (كبريتات النحاس 1%)."
+      ],
+      "pt": [
+        "Saneamento: Remover e destruir todas as vagens infectadas a cada 3-4 dias.",
+        "Pulverização Química: Aplicar Ridomil Gold ou Nordox 75 WG a cada 3 semanas durante a época das chuvas.",
+        "Opção Orgânica: Aplicar calda bordalesa (sulfato de cobre 1%)."
+      ],
+      "sw": [
+        "Usafi: Ondoa na uharibu maganda yote yaliyoathirika kila baada ya siku 3-4.",
+        "Unyunyiziaji wa Kemikali: Tumia Ridomil Gold au Nordox 75 WG kila wiki 3 wakati wa mvua.",
+        "Njia ya Kiasili: Tumia mchanganyiko wa Bordeaux (shaba sulfate 1%)."
+      ],
+      "ha": [
+        "Tsafta: Cire da lalata duk ƙwai masu cutarwa kowace kwana 3-4.",
+        "Maganin Kemikal: Fesa Ridomil Gold ko Nordox 75 WG kowace mako 3 a lokacin ruwan sama.",
+        "Maganin Gargajiya: Fesa bordeaux mixture (copper sulfate 1%)."
+      ],
+      "yo": [
+        "Imototo: Yọ kuro ki o si pa gbogbo awọn eso ti o ni arun run ni alẹ ọjọ 3-4 kọọkan.",
+        "Fọ fun sokiri: Lo Ridomil Gold tabi Nordox 75 WG ni gbogbo ọsẹ 3 ni akoko ojo.",
+        "Aṣayan Adayeba: Lo Bordeaux mixture (copper sulfate 1%)."
+      ],
+      "ig": [
+        "Ịdị ọcha: Wepụ ma gbuo mkpụrụ kooko niile rịọrọ arịa kwa ụbọchị 3-4.",
+        "Kemikal: Fesa Ridomil Gold ma ọ bụ Nordox 75 WG kwa izu 3 n'oge mmiri ozuzo.",
+        "Nkịtị: Fesa Bordeaux mixture (copper sulfate 1%)."
+      ]
+    },
+    "prevention": {
+      "en": "Prune shade trees to increase sunlight penetration, improve farm drainage, and maintain recommended spacing.",
+      "fr": "Tailler les arbres d'ombrage pour favoriser l'ensoleillement et améliorer le drainage de la plantation.",
+      "ar": "تقليم أشجار الظل لزيادة تغلغل أشعة الشمس وتحسين تصريف المياه.",
+      "pt": "Podar as árvores de sombra para aumentar a penetração da luz solar e melhorar a drenagem.",
+      "sw": "Pogoa miti ya kivuli ili kuongeza mwanga wa jua na kuboresha mfumo wa maji.",
+      "ha": "Datsa rassan bishiyoyi domin samun haasken rana da magance tara ruwa.",
+      "yo": "Gbe awọn igi atilẹyin lati jẹ ki run oorun wọle ati ki o mu sisan omi dara sii.",
+      "ig": "Gbutu alaka osisi iji kwe ka anwụ bata nke ọma na ịkwalite nsị mmiri."
+    },
+    "yield_impact": "Up to 80% loss in cocoa pod yield if untreated during heavy rainy season.",
+    "severity": "critical",
+    "crin_reference": "CRIN Technical Bulletin TB-2019-04",
+    "nigerian_regions": ["Ondo", "Osun", "Cross River", "Ekiti", "Edo"]
+  },
+  {
+    "disease_id": "monilia",
+    "common_name": {
+      "en": "Monilia (Frosty Pod Rot)",
+      "fr": "Pourriture Moniliose des Cabosses",
+      "ar": "عفن مونيليا القرني",
+      "pt": "Monilíase do Cacaueiro",
+      "sw": "Ugonjwa wa Monilia",
+      "ha": "Cutar Monilia na Ƙwai",
+      "yo": "Arun Monilia ti Eso Koko",
+      "ig": "Ọrịa Monilia Mkpụrụ Kooko"
+    },
+    "pathogen": "Moniliophthora roreri",
+    "symptoms": {
+      "en": "Swelling, premature ripening, internal rot with thick white dense fungal mat covering pod surface.",
+      "fr": "Gonflement, maturation prématurée, pourriture interne recouverte d'un tapis fongique blanc dense.",
+      "ar": "انتفاخ ونضج مبكر وعفن داخلي مكسو بطبقة فطرية بيضاء كثيفة.",
+      "pt": "Inchaço, maturação precoce e podridão interna com densa camada fúngica branca.",
+      "sw": "Kuvimba, kuiva mapema, na kuoza kwa ndani kukiwa na safu nene ya ukungu mweupe.",
+      "ha": "Kumbura, nuna da wuri, da ruɓewar ciki tare da farin gansakuka a jiki.",
+      "yo": "Kíkùn, gígbe ni kùtùkùtù, ati idajẹ inu pẹlu awọ funfun lori eso.",
+      "ig": "Ịbụ ibu, chara n'oge na ire ure n'ime ya na ihe ọcha n'elu ya."
+    },
+    "treatment": {
+      "en": [
+        "Frequent Pod Harvest: Harvest every 7 days to remove infected pods before spore release.",
+        "Chemical Controls: Apply Copper Hydroxide or Azoxystrobin every 2 weeks.",
+        "Sanitation: Place mummified pods in plastic bags or bury under 30cm of soil."
+      ],
+      "fr": [
+        "Récolte Fréquente: Récolter tous les 7 jours pour retirer les cabosses avant émission de spores.",
+        "Contrôle Chimique: Appliquer Copper Hydroxide ou Azoxystrobin toutes les 2 semaines."
+      ],
+      "ar": [
+        "الحصاد المتكرر: الحصاد كل 7 أيام لإزالة القرون قبل انتشار الأبواغ.",
+        "المكافحة الكيميائية: تطبيق Copper Hydroxide أو Azoxystrobin كل أسبوعين."
+      ],
+      "pt": [
+        "Colheita Frequente: Colher a cada 7 dias para remover vagens infectadas antes da esporulação.",
+        "Controle Químico: Aplicar Copper Hydroxide ou Azoxystrobin a cada 2 semanas."
+      ],
+      "sw": [
+        "Uvunaji wa Mara kwa Mara: Vuna kila siku 7 ili kuondoa maganda kabla ya spores kusambaa.",
+        "Kemikali: Tumia Copper Hydroxide au Azoxystrobin kila wiki 2."
+      ],
+      "ha": [
+        "Girbi Akai-akai: Girbe kowace kwana 7 domin cire ƙwai kafin yaɗuwar ƙwayoyin cuta.",
+        "Kemikal: Fesa Copper Hydroxide ko Azoxystrobin kowace mako 2."
+      ],
+      "yo": [
+        "Ikore Ni Ọsẹọsẹ: Kó eso ni gbogbo ọjọ 7 lati yọ awọn eso kuro ni kete ti o ba rii.",
+        "Kemika: Lo Copper Hydroxide tabi Azoxystrobin ni gbogbo ọsẹ 2."
+      ],
+      "ig": [
+        "Iwe ubi mgbe niile: Weere kooko kwa ụbọchị 7 iji wepụ mkpụrụ tupu arịa gbasara.",
+        "Kemikal: Fesa Copper Hydroxide ma ọ bụ Azoxystrobin kwa izu 2."
+      ]
+    },
+    "prevention": {
+      "en": "Quarantine incoming planting material and maintain canopy aeration.",
+      "fr": "Mettre en quarantaine le matériel végétal et maintenir une bonne aération de la canopée.",
+      "ar": "حجر مواد الغرس الجديدة والحفاظ على تهوية الأشجار.",
+      "pt": "Quarentena para novo material de plantio e manter boa ventilação das copas.",
+      "sw": "Tenga vifaa vipya vya kupanda na uhakikishe mzunguko mzuri wa hewa.",
+      "ha": "Guji amfani da irin da ba a tabbatar da lafiyarsa ba.",
+      "yo": "Ya awọn irugbin tuntun sọtọ ati mu isan afẹfẹ dara sii ni oko.",
+      "ig": "Wepụ kooko ọhụrụ pụọ na ndị ọzọ na idobe ikuku dị mma."
+    },
+    "yield_impact": "Severe crop loss up to 100% if unmanaged in humid environments.",
+    "severity": "critical",
+    "crin_reference": "CRIN Advisory Note AN-2021-02",
+    "nigerian_regions": ["Ondo", "Cross River", "Taraba"]
+  },
+  {
+    "disease_id": "pod_borer",
+    "common_name": {
+      "en": "Cocoa Pod Borer",
+      "fr": "Foreur des Cabosses de Cacao",
+      "ar": "حافرة قرون الكاكاو",
+      "pt": "Broca-do-Cacau",
+      "sw": "Kiwavi wa Maganda ya Kakao",
+      "ha": "Tsutsa Mai Huda Ƙwai",
+      "yo": "Kòkòrò Abẹso Koko",
+      "ig": "Njinji Na-agbapu Mkpụrụ Kooko"
+    },
+    "pathogen": "Conopomorpha cramerella (Insect Pest)",
+    "symptoms": {
+      "en": "Uneven yellow ripening of pod surface, exit holes filled with frass, clumped internal beans.",
+      "fr": "Maturation jaune inégale de la cabosse, trous de sortie remplis de déjections, fèves collées.",
+      "ar": "نضج أصفر غير منتظم، ثقوب خروج مليئة بالفضلات، وحبوب مقتطعة داخلية.",
+      "pt": "Maturação amarela irregular, orifícios de saída com excrementos e amêndoas grudadas.",
+      "sw": "Kuiva kwa manjano kusiko sawa, matundu ya kutokea yenye kinyesi, na mbegu zilizoshikana.",
+      "ha": "Nuna da launin rawaya marar daidaito, ramuka a jikin ƙwai, da lalacewar ƙwayoyi.",
+      "yo": "Ibaje awọ pupa/ayelujara marun lori eso, awọn ihò pẹlu eruku kòkòrò.",
+      "ig": "Ichare n'ụzọ na-adịghị mma, oghere dị n'ahụ ya na mmebi mkpụrụ kooko."
+    },
+    "treatment": {
+      "en": [
+        "Frequent Complete Harvesting (RAMP): Harvest all mature pods every 7 days.",
+        "Pod Sleeving: Wrap young pods (2-5cm) in polyethylene bags to block adult moths.",
+        "Insecticide: Apply Bifenthrin or Chlorpyrifos targeting trunk and main branches."
+      ],
+      "fr": [
+        "Récolte Complète Fréquente: Récolter toutes les cabosses mûres tous les 7 jours.",
+        "Emballage des Cabosses: Envelopper les jeunes cabosses dans des sacs en polyéthylène.",
+        "Insecticide: Appliquer Bifenthrin ou Chlorpyrifos sur le tronc."
+      ],
+      "ar": [
+        "الحصاد الكامل المنتظم: حصاد جميع القرون الناضجة كل 7 أيام.",
+        "تغليف القرون: تغليف القرون الصغيرة بأكياس البولي إيثيلين.",
+        "المبيدات الحشرية: تطبيق Bifenthrin أو Chlorpyrifos على الجذع والفروع."
+      ],
+      "pt": [
+        "Colheita Frequente: Colher todas as vagens maduras a cada 7 dias.",
+        "Ensacamento: Ensacar vagens jovens em sacos de polietileno.",
+        "Inseticida: Aplicar Bifenthrin ou Chlorpyrifos no tronco e ramos."
+      ],
+      "sw": [
+        "Vuna Maganda Yote: Vuna maganda yaliyokomaa kila siku 7.",
+        "Kufunga Maganda: Funga maganda machanga kwa mifuko ya plastiki.",
+        "Dawa ya Wadudu: Tumia Bifenthrin au Chlorpyrifos kwenye shina."
+      ],
+      "ha": [
+        "Kakkaba Girbi: Girbe duk ƙwai da suka nuna kowace kwana 7.",
+        "Rufe Ƙwai: Rufe ƙanana ƙwai da leda.",
+        "Maganin Kwari: Fesa Bifenthrin ko Chlorpyrifos a jikin bishiya."
+      ],
+      "yo": [
+        "Ikore Kíkún: Kó gbogbo eso ti o gbo ni gbogbo ọjọ 7.",
+        "Bọ Eso Lẹwọn: Bọ awọn eso kekere ni apo leda.",
+        "Maganin Kòkòrò: Lo Bifenthrin tabi Chlorpyrifos lori igi."
+      ],
+      "ig": [
+        "Iwe ubi nile: Weere mkpụrụ kooko niile chara kwa ụbọchị 7.",
+        "Ike mkpụrụ akpa: Keere mkpụrụ kooko nta akpa plastic.",
+        "Mkpụrụ ogwu pest: Fesa Bifenthrin ma ọ bụ Chlorpyrifos n'osisi."
+      ]
+    },
+    "prevention": {
+      "en": "Bury pod husks immediately after breaking beans to destroy pupae.",
+      "fr": "Enfouir les coques de cabosses immédiatement après l'écabossage.",
+      "ar": "دفن قشور القرون فوراً بعد تكسيرها للقضاء على الخدر.",
+      "pt": "Enterrar as cascas das vagens imediatamente após a quebra do cacau.",
+      "sw": "Zika makombora ya maganda mara tu baada ya kupasua mbegu.",
+      "ha": "Binne bawon ƙwai nan take bayan fasa ƙwai.",
+      "yo": "Bomi pa eepo eso kete ti o ba la eso tan.",
+      "ig": "Lii akpụkpọ mkpụrụ kooko n'ala ozugbo e gbusịrị ya."
+    },
+    "yield_impact": "Beans clump together into unsellable solid mass, reducing marketable yield by 40-70%.",
+    "severity": "high",
+    "crin_reference": "CRIN Insect Pest Manual IPM-2020-01",
+    "nigerian_regions": ["Ondo", "Osun", "Ekiti", "Oyo", "Abia"]
+  },
+  {
+    "disease_id": "witches_broom",
+    "common_name": {
+      "en": "Witches' Broom Disease",
+      "fr": "Maladie du Balai de Sorcière",
+      "ar": "مرض مكنسة الساحرة",
+      "pt": "Vassoura-de-Bruxa",
+      "sw": "Ugonjwa wa Ufagio wa Mchawi",
+      "ha": "Cutar Tsallan Mayya",
+      "yo": "Arun Ọwọ̀ Àjẹ́",
+      "ig": "Ọrịa Aziza Aje"
+    },
+    "pathogen": "Moniliophthora perniciosa",
+    "symptoms": {
+      "en": "Abnormal vegetative broom-like shoots, vegetative hypertrophy, distorted pod development with hard woody texture.",
+      "fr": "Pousses végétatives anormales en forme de balai, hypertrophie et cabosses déformées et ligneuses.",
+      "ar": "نمو براعم غير طبيعية تشبه المكنسة، تضخم الأنسجة، وثمار مشوهة وخشبية.",
+      "pt": "Brotamentos anormais em forma de vassoura, hipertrofia e vagens deformadas e endurecidas.",
+      "sw": "Matawi yasiyo ya kawaida yanayofanana na ufagio, na maganda yaliyopotoka yenye ugumu.",
+      "ha": "Tohowar rassan da basu da kyau masu kama da tsintsiya da kauri a jikin ƙwai.",
+      "yo": "Awon ewe ti o n dagba ni irisi ọwọ̀, ati eso ti o ni awọ lile.",
+      "ig": "Akwụkwọ kooko na-eto dị ka aziza na mkpụrụ kooko siri ike."
+    },
+    "treatment": {
+      "en": [
+        "Phytosanitary Pruning: Prune all brooms 20cm below infection point twice yearly (dry season & mid-rainy season).",
+        "Destroy Prunings: Burn or deeply bury cut brooms.",
+        "Chemical Treatment: Apply Copper Oxychloride during flush flushes."
+      ],
+      "fr": [
+        "Taille Phytosanitaire: Tailler tous les balais 20cm sous le point d'infection deux fois par an.",
+        "Détruire les Déchets: Brûler ou enfouir profondément les balais coupés."
+      ],
+      "ar": [
+        "التقليم الصحي: تقليم جميع الأغصان المصابة 20 سم أسفل نقطة الإصابة مرتين سنوياً.",
+        "إتلاف المتقلمات: حرق أو دفن الأغصان المقطوعة."
+      ],
+      "pt": [
+        "Poda Fitossanitária: Podar vassouras 20cm abaixo da infecção duas vezes ao ano.",
+        "Destruição: Queimar ou enterrar profundamente os ramos cortados."
+      ],
+      "sw": [
+        "Kupogoa kwa Usafi: Pogoa matawi yote yaliyoathirika masentimita 20 chini ya eneo la ugonjwa mara 2 kwa mwaka.",
+        "Kuharibu Matawi: Choma au zika matawi yaliyokatwa."
+      ],
+      "ha": [
+        "Datsa Rassana: Yanke rassan da suka kamu masallacin 20cm a kasan inda cutar take sau biyu a shekara.",
+        "Lalata Rassan: Ƙona ko binne rassan da aka yanke."
+      ],
+      "yo": [
+        "Gbe Rassan Kuro: Yọ awọn rassan ti o ni arun ku 20cm ni isalẹ ni meji ninu ọdun.",
+        "Pajẹ Awọn Rassan: Sun tabi bomi pa awọn rassan ti o yọ kuro."
+      ],
+      "ig": [
+        "Gbutu alaka arịa: Gbutu alaka kooko rịọrọ arịa 20cm n'okpuru ya ugboro abụọ n'afọ.",
+        "Gbuo alaka gbuturu: Shịa ma ọ bụ lii alaka niile gbuturu."
+      ]
+    },
+    "prevention": {
+      "en": "Plant resistant cocoa clones (e.g. CRIN TC-series hybrids).",
+      "fr": "Planter des clones de cacao résistants (ex: hybrides CRIN série TC).",
+      "ar": "زراعة سلالات الكاكاو المقاومة (مثل هجين CRIN TC).",
+      "pt": "Plantio de clones resistentes de cacaueiro.",
+      "sw": "Panda aina za kakao zinazostahimili magonjwa.",
+      "ha": "Shuka nau'in irin kakkaba mai juriya.",
+      "yo": "Gbin irugbin koko ti o ni agbara lati gegun arun (CRIN TC hybrids).",
+      "ig": "Kụọ kooko nwere ike iguzogide ọrịa (CRIN TC hybrids)."
+    },
+    "yield_impact": "Reduces tree productivity by up to 90% over 3 seasons if unpruned.",
+    "severity": "critical",
+    "crin_reference": "CRIN Extension Bulletin EB-2018-09",
+    "nigerian_regions": ["Ondo", "Cross River", "Akwa Ibom"]
+  },
+  {
+    "disease_id": "cssvd",
+    "common_name": {
+      "en": "Cocoa Swollen Shoot Virus (CSSVD)",
+      "fr": "Virus des Pousses Gonflées du Cacao",
+      "ar": "فيروس انتفاخ براعم الكاكاو",
+      "pt": "Vírus do Ramos Inchados do Cacau",
+      "sw": "Virusi vya Chipukizi Vilivyovimba vya Kakao",
+      "ha": "Cutar Kumburin Tohowar Koko",
+      "yo": "Kòkòrò Arun Ìgbọ̀n Koko",
+      "ig": "Virusi Ịbụ Ibu Ahụ Kooko"
+    },
+    "pathogen": "Badnavirus (Transmitted by Mealybugs / Planococcoides njalensis)",
+    "symptoms": {
+      "en": "Swollen stem internodes, red vein banding on leaves, fern-like chlorotic patterns, small rounded malformed pods.",
+      "fr": "Gonflement des nœuds de la tige, bandes rouges sur les nervures des feuilles, cabosses petites et déformées.",
+      "ar": "انتفاخ العقل الساقية، شريط حمر في عروق الأوراق، ونمو ثمار صغيرة ومشوهة.",
+      "pt": "Entrenós do caule inchados, faixas vermelhas nas nervuras foliares e vagens pequenas e deformadas.",
+      "sw": "Chipukizi vilivyovimba, mistari myekundu kwenye mishipa ya majani, na maganda madogo yaliyopotoka.",
+      "ha": "Kumburin bishiya, jan layi a jikin ganye, da ƙanana ƙwai marasa kyau.",
+      "yo": "Kíkùn igi koko, laini pupa lori ewe, ati eso kekere ti ko daa.",
+      "ig": "Ịbụ ibu ahụ osisi kooko, akara uhie n'akwụkwọ ya na mkpụrụ kooko nta."
+    },
+    "treatment": {
+      "en": [
+        "Cutting-Out (Eradication): Remove and cut down infected tree and surrounding buffer trees (within 5-10 meters).",
+        "Mealybug Vector Control: Apply systemic insecticide (Imidacloprid) to suppress mealybug populations.",
+        "Barrier Strip: Plant non-host barrier crops (e.g. oil palm or citrus) around farm perimeter."
+      ],
+      "fr": [
+        "Abattage (Éradication): Éradiquer et couper l'arbre infecté et les arbres voisins (zone tampon de 5 à 10 m).",
+        "Contrôle des Cochenilles: Appliquer un insecticide systémique (Imidacloprid)."
+      ],
+      "ar": [
+        "القطع والإزالة: قطع الشجرة المصابة والأشجار المحيطة بها (نطاق 5-10 أمتار).",
+        "مكافحة البق الدقيقي: تطبيق مبيد حشري نظامي (Imidacloprid)."
+      ],
+      "pt": [
+        "Erradicação: Cortar a árvore infectada e as árvores ao redor (raio de 5-10m).",
+        "Controle de Cochonilhas: Aplicar inseticida sistêmico (Imidacloprid)."
+      ],
+      "sw": [
+        "Kukata Mti: Kata mti ulioathirika na miti ya jirani (mita 5-10).",
+        "Kudhibiti Wadudu: Tumia Imidacloprid kuua wadudu wa mealybug."
+      ],
+      "ha": [
+        "Yanke Bishiya: Yanke bishiyar da ta kamu da bishiyoyin kusa da ita (mita 5-10).",
+        "Kashi Kwari: Fesa Imidacloprid domin kille kwarin mealybug."
+      ],
+      "yo": [
+        "Gbe Igi Kuro: Gbe igi ti o ni arun kuro ati igi ti o wa nitosi re (mita 5-10).",
+        "Pajẹ Kòkòrò: Lo Imidacloprid lati pa mealybugs."
+      ],
+      "ig": [
+        "Gbutu osisi: Gbutu osisi rịọrọ arịa na ndị dị ya nso (mita 5-10).",
+        "Gbuo pest: Fesa Imidacloprid iji gbuo mealybugs."
+      ]
+    },
+    "prevention": {
+      "en": "Plant CSSVD-tolerant CRIN cocoa varieties and maintain barrier crops.",
+      "fr": "Utiliser des variétés de cacao tolérantes sélectionnées par le CRIN.",
+      "ar": "زراعة أصناف الكاكاو المتحملة للفيروس المعمدة من CRIN.",
+      "pt": "Utilizar variedades de cacau tolerantes recomendadas.",
+      "sw": "Panda aina za kakao zinazovumilia virusi hivi.",
+      "ha": "Amfani da irin koko mai juriya da CRIN ta amince da shi.",
+      "yo": "Gbin irugbin koko ti agbara re ga ti CRIN fọwọsi.",
+      "ig": "Kụọ ụdị kooko nwere ike iguzogide virusi nke CRIN kwadoro."
+    },
+    "yield_impact": "Total tree death within 2-3 years of infection, leading to complete farm loss.",
+    "severity": "critical",
+    "crin_reference": "CRIN Special Advisory CSSVD-2022-01",
+    "nigerian_regions": ["Osun", "Oyo", "Ondo", "Ekiti"]
+  },
+  {
+    "disease_id": "frosty_pod",
+    "common_name": {
+      "en": "Frosty Pod Rot",
+      "fr": "Pourriture Givrée des Cabosses",
+      "ar": "عفن القرن الصقيعي",
+      "pt": "Podridão-Aquosa do Cacaueiro",
+      "sw": "Ugonjwa wa Kuoza kwa Maganda",
+      "ha": "Cutar Ruɓewar Ƙwai Mai Sanyi",
+      "yo": "Arun Idajẹ Eso Koko",
+      "ig": "Ọrịa Ire Ure Mkpụrụ Kooko"
+    },
+    "pathogen": "Moniliophthora roreri",
+    "symptoms": {
+      "en": "Dense white to creamy fungal bloom on green pods, dark internal necrosis, wet heavy pods.",
+      "fr": "Feutrage fongique blanc à crème dense sur cabosses vertes, nécrose interne sombre.",
+      "ar": "نمو فطر أبيض كثيف إلى كريمي على القرون الخضراء، ونخر داخلي داكن.",
+      "pt": "Camada fúngica branca e densa sobre vagens verdes e necrose interna.",
+      "sw": "Safu nene ya ukungu mweupe kwenye maganda ya kijani na kuoza kwa ndani.",
+      "ha": "Maganin gansakuka mai launin fari a jikin ƙwai da ruɓewar ciki.",
+      "yo": "Awọ funfun lori eso kọọkan pẹlu idajẹ inu dudu.",
+      "ig": "Ihe ọcha n'elu mkpụrụ kooko ndụ na ire ure n'ime ya."
+    },
+    "treatment": {
+      "en": [
+        "Weekly Removal: Remove all pods showing early symptoms before white mat forms.",
+        "Fungicide Application: Apply Copper Sulfate or Mancozeb at 14-day intervals.",
+        "Composting: Bury removed pods deep under soil with lime."
+      ],
+      "fr": [
+        "Retrait Hebdomadaire: Retirer toutes les cabosses présentant des symptômes précoces.",
+        "Application de Fongicide: Appliquer Copper Sulfate ou Mancozeb tous les 14 jours."
+      ],
+      "ar": [
+        "الإزالة الأسبوعية: إزالة جميع القرون التي تظهر عليها الأعراض المبكرة.",
+        "تطبيق المبيدات الفطرية: تطبيق Copper Sulfate أو Mancozeb كل 14 يوماً."
+      ],
+      "pt": [
+        "Remoção Semanal: Remover vagens com sintomas iniciais semanalmente.",
+        "Fungicida: Aplicar Copper Sulfate ou Mancozeb a cada 14 dias."
+      ],
+      "sw": [
+        "Ondoa Kila Wiki: Ondoa maganda yote yanayoonyesha dalili za mapema.",
+        "Dawa ya Ukungu: Tumia Copper Sulfate au Mancozeb kila siku 14."
+      ],
+      "ha": [
+        "Cire Kowace Mako: Cire duk ƙwai da ke nuna alamar cuta kowace mako.",
+        "Maganin Fungus: Fesa Copper Sulfate ko Mancozeb kowace kwana 14."
+      ],
+      "yo": [
+        "Yọ ni Ọsẹọsẹ: Yọ gbogbo eso ti o n sga alamar arun kuro.",
+        "Lo Fo fun sokiri: Lo Copper Sulfate tabi Mancozeb ni gbogbo ọjọ 14."
+      ],
+      "ig": [
+        "Wepụ kwa izu: Wepụ mkpụrụ kooko niile na-egosi alama ọrịa.",
+        "Mkpụrụ ogwu fungus: Fesa Copper Sulfate ma ọ bụ Mancozeb kwa ụbọchị 14."
+      ]
+    },
+    "prevention": {
+      "en": "Maintain 3m x 3m tree spacing and optimize sunlight penetration.",
+      "fr": "Maintenir un espacement de 3m x 3m et optimiser la pénétration du soleil.",
+      "ar": "الحفاظ على مسافة غرس 3م × 3م وتحسين الإضاءة الشمسية.",
+      "pt": "Manter espaçamento de 3m x 3m e otimizar luz solar.",
+      "sw": "Weka nafasi ya mita 3 kwa mita 3 na uongeze mwanga wa jua.",
+      "ha": "Ratsa tazarar bishiyoyi mita 3 zuwa 3.",
+      "yo": "Zide aaye mita 3 nipasẹ mita 3 laarin awọn igi.",
+      "ig": "Dobe oghere mita 3 n'etiti osisi kooko."
+    },
+    "yield_impact": "Causes 60-90% loss of harvestable pods if uncontrolled.",
+    "severity": "high",
+    "crin_reference": "CRIN Factsheet FS-2021-05",
+    "nigerian_regions": ["Ondo", "Cross River", "Edo"]
+  },
+  {
+    "disease_id": "anthracnose",
+    "common_name": {
+      "en": "Anthracnose",
+      "fr": "Anthracnose du Cacaoyer",
+      "ar": "مرض الأنثراكنوز",
+      "pt": "Antracnose do Cacaueiro",
+      "sw": "Ugonjwa wa Anthracnose",
+      "ha": "Cutar Anthracnose na Ganye da Ƙwai",
+      "yo": "Arun Anthracnose ti Ewe ati Eso",
+      "ig": "Ọrịa Anthracnose Akwụkwọ na Mkpụrụ"
+    },
+    "pathogen": "Colletotrichum gloeosporioides",
+    "symptoms": {
+      "en": "Sunken brown lesions with pink or orange spore masses on leaves, twigs, and pods, tip dieback.",
+      "fr": "Lésions brunes enfoncées avec masses de spores roses/oranges sur feuilles et cabosses, dessèchement des rameaux.",
+      "ar": "آفات بنية غائرة مع كتل أبواغ وردية أو برتقالية على الأوراق والقرون، وجفاف الأطراف.",
+      "pt": "Lesões castanhas afundadas com massas de esporos rosadas ou alaranjadas nas folhas e vagens.",
+      "sw": "Madoa ya kahawia yaliyobonyea yenye ukungu wa rangi ya waridi au machungwa kwenye majani na maganda.",
+      "ha": "Tabo masu launin ruwan kasa a jikin ganye da ƙwai pẹlu ɗigon hoda ko narangi.",
+      "yo": "Abawọn brown lori ewe ati eso pẹlu awọ pupa/osan.",
+      "ig": "Akara kahawia n'akwụkwọ na mkpụrụ kooko na-enwe agba pink ma ọ bụ orange."
+    },
+    "treatment": {
+      "en": [
+        "Pruning Infected Twigs: Cut off dead twigs 10cm below lesion during dry spells.",
+        "Fungicide Spray: Apply Copper Oxychloride or Chlorothalonil monthly during leaf flush."
+      ],
+      "fr": [
+        "Taille des Rameaux Infectés: Couper les rameaux morts 10cm sous la lésion.",
+        "Pulverisation de Fongicide: Appliquer Copper Oxychloride ou Chlorothalonil tous les mois."
+      ],
+      "ar": [
+        "تقليم الأغصان المصابة: قطع الأغصان الميتة 10 سم أسفل الإصابة.",
+        "رش المبيدات الفطرية: تطبيق Copper Oxychloride أو Chlorothalonil شهرياً."
+      ],
+      "pt": [
+        "Poda de Ramos: Cortar ramos secos 10cm abaixo da lesão.",
+        "Pulverização: Aplicar Copper Oxychloride ou Chlorothalonil mensalmente."
+      ],
+      "sw": [
+        "Pogoa Matawi Yaliyokauka: Kata matawi yaliyokauka sentimita 10 chini ya lesion.",
+        "Dawa ya Ukungu: Tumia Copper Oxychloride au Chlorothalonil kila mwezi."
+      ],
+      "ha": [
+        "Datsa Rassana: Yanke busassun rassan 10cm kasan inda cutar take.",
+        "Fesa Magani: Fesa Copper Oxychloride ko Chlorothalonil a kowane wata."
+      ],
+      "yo": [
+        "Gbe Awọn Rassan Ku: Yọ awọn rassan gbigbe kuro 10cm ni isalẹ.",
+        "Lo Fọ fun sokiri: Lo Copper Oxychloride tabi Chlorothalonil ni gbogbo mọkn."
+      ],
+      "ig": [
+        "Gbutu alaka kpoọrọ nkụ: Gbutu alaka kooko kpoọrọ nkụ 10cm n'okpuru ya.",
+        "Mkpụrụ ogwu: Fesa Copper Oxychloride ma ọ bụ Chlorothalonil kwa ọnwa."
+      ]
+    },
+    "prevention": {
+      "en": "Avoid water stress, ensure proper fertilisation with potassium and nitrogen balance.",
+      "fr": "Éviter le stress hydrique et assurer une fertilisation équilibrée en potassium et azote.",
+      "ar": "تجنب الإجهاد المائي وضمان التسميد المتوازن بالبوتاسيوم والنيتروجين.",
+      "pt": "Evitar estresse hídrico e adubar adequadamente.",
+      "sw": "Epuka ukosefu wa maji na uweke mbolea ya kutosha.",
+      "ha": "Tabbatar da wadataccen ruwa da takin zamani.",
+      "yo": "Mu daju pe omi ati takin sọji wa fun awọn igi koko.",
+      "ig": "Tabbatar na kooko nwere mmiri na takin dị mma."
+    },
+    "yield_impact": "Moderate pod damage and leaf loss, reducing overall yield by 15-30%.",
+    "severity": "medium",
+    "crin_reference": "CRIN Advisory Note AN-2020-03",
+    "nigerian_regions": ["Ondo", "Osun", "Ekiti", "Oyo", "Kogi", "Abia"]
+  },
+  {
+    "disease_id": "mirid",
+    "common_name": {
+      "en": "Mirid Bug (Capsid Pest)",
+      "fr": "Punaise Miride (Capside du Cacaoyer)",
+      "ar": "حشرة الميريد (كبسيد الكاكاو)",
+      "pt": "Percevejo-Mirídeo (Capsídeo)",
+      "sw": "Wadudu wa Mirid (Capsid)",
+      "ha": "Kwarin Mirid (Capsid)",
+      "yo": "Kòkòrò Mirid (Capsid)",
+      "ig": "Pest Mirid (Capsid)"
+    },
+    "pathogen": "Sahlbergella singularis / Distantiella theobroma (Insect Pest)",
+    "symptoms": {
+      "en": "Dark oily sunken feeding lesions on young pods and green shoots, blast dieback of canopy shoots ('blast' effect).",
+      "fr": "Lésions de nutrition brunes et huileuses sur cabosses et jeunes pousses, dessèchement du feuillage en 'blast'.",
+      "ar": "آفات تغذية داكنة زيتية غائرة على القرون والأغصان، وجفاف أطراف الأشجار.",
+      "pt": "Lesões escuras e oleosas nas vagens e brotos verdes, causando secamento da copa ('blast').",
+      "sw": "Madoa ya mafuta meusi kwenye maganda na chipukizi, na kukauka kwa matawi ya juu.",
+      "ha": "Tabo masu launin ruwan kasa da mai a jikin ƙwai da rassan bishiya, da bushewar ganye.",
+      "yo": "Abawọn dudu lori eso ati ewe koko, ti o n fa gbigbe rassan koko.",
+      "ig": "Akara ojii dị ka mmanụ n'ahụ mkpụrụ kooko na akwụkwọ ya na-akpọnwụ."
+    },
+    "treatment": {
+      "en": [
+        "Insecticide Spraying: Apply Imidacloprid (Confidor 200 SL) or Thiamethoxam during peak populations (August - November).",
+        "Target Spot Application: Spray canopy leaves, branch forks, and pod clusters directly.",
+        "Biological Control: Protect beneficial ants (Oecophylla longinoda) which predate on mirid nymphs."
+      ],
+      "fr": [
+        "Pulvérisation d'Insecticide: Appliquer Imidacloprid ou Thiamethoxam entre août et novembre.",
+        "Application Ciblée: Pulvériser directement la canopée et les jonctions de branches.",
+        "Lutte Biologique: Protéger les fourmis prédatrices bénéfiques."
+      ],
+      "ar": [
+        "رش المبيدات الحشرية: تطبيق Imidacloprid أو Thiamethoxam بين أغسطس ونوفمبر.",
+        "الرش الموجه: رش الأوراق ومناطق تفرع الأغصان مباشرة.",
+        "المكافحة البيولوجية: حماية النمل المفترس النافع."
+      ],
+      "pt": [
+        "Inseticida: Aplicar Imidacloprid ou Thiamethoxam entre agosto e novembro.",
+        "Aplicação Direcionada: Pulverizar diretamente a copa e axilas dos ramos.",
+        "Controle Biológico: Proteger formigas predadoras benéficas."
+      ],
+      "sw": [
+        "Kunyanyizia Dawa: Tumia Imidacloprid au Thiamethoxam kati ya Agosti na Novemba.",
+        "Kunyanyizia Sehemu Maalum: Nyunyizia majani na matawi moja kwa moja.",
+        "Ulinzi wa Asili: Hifadhi chungu wanaokula wadudu hawa."
+      ],
+      "ha": [
+        "Fesa Maganin Kwari: Fesa Imidacloprid ko Thiamethoxam tsakanin Agusta zuwa Nuwamba.",
+        "Fesa a Waje Na Musamman: Fesa jikin bishiya da rassan.",
+        "Taimakon Halitta: Kiyaye kwarin kishi da ke cin mirids."
+      ],
+      "yo": [
+        "Fọ Sokiri Kòkòrò: Lo Imidacloprid tabi Thiamethoxam lati Oṣu Sẹẹrẹ ti Oṣu Kọkanla.",
+        "Ibùdó Fọ Sokiri: Fọ sokiri lori ewe ati rassan igi kọọkan.",
+        "Idabobo Adayeba: Dabobo ijalo ti o n pa kòkòrò mirid."
+      ],
+      "ig": [
+        "Fesa ogwu pest: Fesa Imidacloprid ma ọ bụ Thiamethoxam n'etiti August na November.",
+        "Fesa n'ebe pụrụ iche: Fesa akwụkwọ na alaka osisi kooko.",
+        "Nchekwa ndụ: Chekwa ahụhụ na-eri mirid."
+      ]
+    },
+    "prevention": {
+      "en": "Maintain shade tree density to avoid canopy gaps where mirids aggregate.",
+      "fr": "Maintenir la densité d'ombrage pour éviter les trouées de canopée qui attirent les mirides.",
+      "ar": "الحفاظ على كثافة أشجار الظل لتجنب الفجوات التي تجذب الميريد.",
+      "pt": "Manter densidade de sombra para evitar frestas na copa.",
+      "sw": "Hifadhi miti ya kivuli ili kuzuia nafasi wazi zinazovutia wadudu hawa.",
+      "ha": "Kiyaye bishiyoyin inuwa domin magance buɗe gurbin da kwarin ke shiga.",
+      "yo": "Zide igi atilẹyin lati kọ kọkọrọ mirid lori igi koko.",
+      "ig": "Dobe osisi nssị iji kuki ka oghere na-adịghị n'elu osisi kooko."
+    },
+    "yield_impact": "Can destroy 30-75% of annual crop yield and kill young cocoa saplings.",
+    "severity": "high",
+    "crin_reference": "CRIN Mirid Control Handbook MCH-2022-04",
+    "nigerian_regions": ["Ondo", "Osun", "Cross River", "Ekiti", "Oyo", "Edo", "Ogun"]
+  },
+  {
+    "disease_id": "healthy",
+    "common_name": {
+      "en": "Healthy Cocoa Plant",
+      "fr": "Cacaoyer Sain",
+      "ar": "نبات كاكاو سليم",
+      "pt": "Cacaueiro Saudável",
+      "sw": "Mti wa Kakao Wenye Afya",
+      "ha": "Bishiyar Koko Mai Lafiya",
+      "yo": "Igi Koko Ti O Ni Alafia",
+      "ig": "Osisi Kooko Nwere Ahụ Mba"
+    },
+    "pathogen": "None (Normal physiological status)",
+    "symptoms": {
+      "en": "Vibrant green leaves without discoloration, smooth clean pods, sturdy trunk, well-formed cushion growth.",
+      "fr": "Feuilles vert vif sans décoloration, cabosses lisses et propres, tronc solide.",
+      "ar": "أوراق خضراء زاهية بدون تغير في اللون، قرون ملساء ونظيفة، وجذع قوي.",
+      "pt": "Folhas verdes vibrantes sem descoloração, vagens limpas e tronco firme.",
+      "sw": "Majani ya kijani kibichi yasiyo na madoa, maganda safi laini, na shina imara.",
+      "ha": "Korayen ganye masu kyau marasa aibu, ƙwai masu tsabta, da bishiya mai karfi.",
+      "yo": "Awọ ewe ti o dán ti o ba ń gbo, eso ti o mọ́, ati igi ti o ni okun.",
+      "ig": "Akwụkwọ ndụ dị mma na-enweghị akara ọrịa, mkpụrụ kooko dị ọcha na osisi siri ike."
+    },
+    "treatment": {
+      "en": [
+        "No treatment required.",
+        "Routine Maintenance: Continue regular weeding, organic mulching, and routine pruning.",
+        "Nutrition: Apply balanced NPK 12-24-12 cocoa fertilizer at onset of rains."
+      ],
+      "fr": [
+        "Aucun traitement nécessaire.",
+        "Entretien Régulier: Poursuivre le désherbage et le paillage biologique.",
+        "Fertilisation: Appliquer engrais NPK 12-24-12 au début des pluies."
+      ],
+      "ar": [
+        "لا يتطلب أي علاج.",
+        "الصيانة الروتينية: الاستمرار في التعشيب المنتظم والتغطية العضوية.",
+        "التغذية: تطبيق سماد NPK 12-24-12 عند بداية الأمطار."
+      ],
+      "pt": [
+        "Nenhum tratamento necessário.",
+        "Manutenção: Manter capina regular e adubação.",
+        "Nutrição: Aplicar fertilizante NPK 12-24-12 no início das chuvas."
+      ],
+      "sw": [
+        "Hakuna matibabu yanayohitajika.",
+        "Upatikanaji wa Kawaida: Endelea na palizi na kuweka mbolea ya kiasili.",
+        "Lishe: Tumia mbolea ya NPK 12-24-12 wakati mvua inapoanza."
+      ],
+      "ha": [
+        "Ba a buƙatar magani.",
+        "Tsaftace Gona: Ci gaba da noman ciyawa da takin zamani.",
+        "Ciyawa: Fesa takin NPK 12-24-12 a farkon ruwan sama."
+      ],
+      "yo": [
+        "Kò sí itọju ti a n fẹ́.",
+        "Imototo Oko: Tẹsiwaju lati ro oko ati lo takin.",
+        "Takín: Lo takin NPK 12-24-12 ni kete ti ojo ba bẹrẹ."
+      ],
+      "ig": [
+        "Ọ dịghị ogwu dị mkpa.",
+        "Nchekwa ubi: Gaa n'ihu ịsacha ubi na inye ya takin.",
+        "Takin: Fesa takin NPK 12-24-12 n'oge mmiri ozuzo."
+      ]
+    },
+    "prevention": {
+      "en": "Maintain regular farm inspection schedule and good sanitation practices.",
+      "fr": "Maintenir un calendrier d'inspection régulière de la plantation.",
+      "ar": "الحفاظ على جدول التفتيش الدوري للمزرعة وممارسات النظافة.",
+      "pt": "Manter inspeções regulares na propriedade.",
+      "sw": "Endelea kukagua shamba mara kwa mara.",
+      "ha": "Gudanar da duban gona akai-akai.",
+      "yo": "Tẹsiwaju lati yẹ oko wo ni gbogbo igba.",
+      "ig": "Na-eleba ubi anya mgbe niile."
+    },
+    "yield_impact": "Optimal yield potential expected (100% healthy crop production).",
+    "severity": "none",
+    "crin_reference": "CRIN Standard Production Guide PG-2023-01",
+    "nigerian_regions": ["Ondo", "Osun", "Cross River", "Ekiti", "Oyo", "Edo", "Abia", "Taraba", "Kogi", "Ogun", "Akwa Ibom"]
+  }
+]
