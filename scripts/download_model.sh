@@ -22,9 +22,9 @@ echo " Destination: $MODEL_FILE"
 echo "=================================================="
 
 if command -v curl >/dev/null 2>&1; then
-    curl -L --fail --progress-bar -o "$TMP_FILE" "$MODEL_URL"
+    curl -L -C - --fail --progress-bar -o "$TMP_FILE" "$MODEL_URL"
 elif command -v wget >/dev/null 2>&1; then
-    wget -O "$TMP_FILE" "$MODEL_URL"
+    wget -c -O "$TMP_FILE" "$MODEL_URL"
 else
     echo "[!] ERROR: Neither curl nor wget found. Please download $MODEL_URL manually to $MODEL_FILE"
     exit 1
