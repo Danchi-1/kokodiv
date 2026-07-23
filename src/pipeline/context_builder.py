@@ -5,39 +5,24 @@ from src.classifier.constants import DISEASE_DISPLAY_NAMES
 from src.rag.retriever import CocoaRAGRetriever
 from src.language.detector import FastLanguageDetector, SUPPORTED_LANGUAGES
 
-SYSTEM_PROMPT_TEMPLATE = """SYSTEM:
-You are Kokodiv — an expert cocoa disease diagnostician with deep knowledge 
-of African cocoa farming, specifically Nigerian growing conditions. You help 
-farmers identify diseases, understand treatments, and protect their yields.
-You are precise, honest about uncertainty, and always practical.
-
-RESPOND IN: {language_name} ({language_code})
+SYSTEM_PROMPT_TEMPLATE = """You are Kokodiv, an expert cocoa farming doctor in West Africa.
+Language: {language_name} ({language_code})
 {pidgin_instruction}
 
-CLASSIFIER ANALYSIS:
-{classifier_confidence_note}
-
-RETRIEVED DISEASE PROFILES:
+CLASSIFIER: {classifier_confidence_note}
+DISEASE CONTEXT:
 {rag_retrieved_context}
 
-REASONING PROTOCOL:
-Step 1 — Visual observation: Describe what you observe in the cocoa plant image
-Step 2 — Cross-reference: Compare visual observations with classifier scores
-Step 3 — Diagnosis: State your diagnosis with honest confidence level
-Step 4 — If classifier confidence < 40%: explicitly state image quality or atypical limitations
-Step 5 — Treatment: Provide specific, actionable treatment steps from retrieved profiles
-Step 6 — Prevention: State one key prevention measure
-Step 7 — Yield impact: Brief statement on expected yield effect if untreated
+User Question: {user_input}
+Provide diagnosis and 3 simple treatment steps in {language_name}:"""
 
-SAFETY & CONSTRAINTS:
-- Maximum 200 tokens for core answer
-- Never fabricate chemical names, dosages, or remedies not in the retrieved profiles
-- Preserve trade names (e.g. Ridomil Gold, Nordox 75 WG, Imidacloprid) exactly as given
-- Always recommend consulting a local agricultural extension officer for severe cases
-- If the image does not appear to be a cocoa plant, state so immediately
+TEXT_CHAT_PROMPT_TEMPLATE = """You are Kokodiv, an expert cocoa farming doctor.
+Respond concisely in {language_name} ({language_code}).
+{pidgin_instruction}
+{rag_retrieved_context}
 
-USER QUESTION: {user_input}
-"""
+User Question: {user_input}
+Answer clearly in 2-3 bullet points:"""
 
 class KokodivContextBuilder:
     """
@@ -110,11 +95,18 @@ class KokodivContextBuilder:
         # 2. Retrieve RAG chunks in target language
         rag_context = self.retriever.format_rag_context_for_prompt(candidate_ids, language_code=target_lang)
 
-        # 3. Format final prompt
+        # 3. Format final prompt (Select fast text-only template vs photo diagnosis template)
+        is_photo = bool(user_input and "image" in user_input.lower()) or (len(candidate_ids) > 0 and cnn_scores.get(candidate_ids[0], 0) > 0.6)
+        
+        if not is_photo and user_input.strip():
+            template = TEXT_CHAT_PROMPT_TEMPLATE
+        else:
+            template = SYSTEM_PROMPT_TEMPLATE
+
         if not user_input.strip():
             user_input = "Please diagnose this cocoa plant image and provide treatment guidance."
 
-        formatted_prompt = SYSTEM_PROMPT_TEMPLATE.format(
+        formatted_prompt = template.format(
             language_name=lang_name,
             language_code=target_lang,
             pidgin_instruction=pidgin_inst,
