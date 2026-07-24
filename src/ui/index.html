@@ -4,26 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Kokodiv — Offline Cocoa Farm Doctor</title>
+  <!-- Google Fonts: Inter & Caveat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <!-- Lucide Icons Library -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     :root {
-      --bg: #09090b;
-      --sidebar: #121215;
-      --surface: #18181b;
-      --border: #27272a;
-      --text: #fafafa;
-      --text-muted: #a1a1aa;
-      --primary: #16a34a;
-      --primary-hover: #15803d;
-      --primary-muted: rgba(22, 163, 74, 0.12);
+      --bg: #FAF9F5;
+      --sidebar: #FFFFFF;
+      --surface: #FFFFFF;
+      --surface-yellow: #FEF08A;
+      --surface-green: #DCFCE7;
+      --surface-blue: #DBEAFE;
+      --surface-purple: #F3E8FF;
+      --border: #18181B;
+      --border-width: 2.5px;
+      --shadow-hard: 3px 3px 0px #18181B;
+      --shadow-hard-lg: 4px 4px 0px #18181B;
+      --text: #18181B;
+      --text-muted: #52525B;
+      --primary: #16A34A;
+      --primary-hover: #15803D;
+      --primary-muted: #DCFCE7;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
     body { background-color: var(--bg); color: var(--text); height: 100vh; overflow: hidden; display: flex; -webkit-font-smoothing: antialiased; }
 
     /* Lucide icon alignment */
-    .icon { display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; stroke-width: 2px; }
+    .icon { display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; stroke-width: 2.5px; }
+
+    /* Handwritten Accent Text */
+    .handwritten { font-family: 'Caveat', cursive; font-size: 1.35rem; font-weight: 700; color: #16A34A; }
 
     /* Page Navigation Views */
     .page-view { display: none; width: 100%; height: 100vh; overflow: hidden; }
@@ -31,86 +45,102 @@
 
     /* LANDING PAGE STYLING */
     .landing-container { width: 100%; height: 100vh; overflow-y: auto; background-color: var(--bg); display: flex; flex-direction: column; }
-    .landing-nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 3rem; border-bottom: 1px solid var(--border); max-width: 1300px; margin: 0 auto; width: 100%; }
-    .brand-logo { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text); display: flex; align-items: center; gap: 0.5rem; }
-    .nav-links { display: flex; gap: 2rem; align-items: center; }
-    .nav-link { color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; cursor: pointer; transition: color 0.15s; }
-    .nav-link:hover { color: var(--text); }
+    .landing-nav { display: flex; justify-content: space-between; align-items: center; padding: 1.25rem 2.5rem; border-bottom: var(--border-width) solid var(--border); background-color: #FFFFFF; max-width: 100%; width: 100%; }
+    
+    .brand-logo { font-size: 1.35rem; font-weight: 900; letter-spacing: -0.03em; color: var(--text); display: flex; align-items: center; gap: 0.5rem; }
+    .brand-logo-badge { background-color: #FEF08A; border: var(--border-width) solid var(--border); padding: 0.15rem 0.5rem; border-radius: 4px; box-shadow: 2px 2px 0px #18181B; }
 
-    .hero-section { max-width: 1100px; margin: 4rem auto 3rem auto; text-align: center; padding: 0 2rem; }
-    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background-color: var(--primary-muted); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); padding: 0.35rem 0.85rem; border-radius: 9999px; font-size: 0.8rem; font-weight: 600; text-transform: uppercase; margin-bottom: 1.5rem; }
-    .hero-title { font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; color: var(--text); margin-bottom: 1.25rem; }
-    .hero-desc { font-size: 1.15rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 2.5rem auto; line-height: 1.6; }
+    .nav-links { display: flex; gap: 1.5rem; align-items: center; }
+    .nav-link { color: var(--text); text-decoration: none; font-size: 0.9rem; font-weight: 700; cursor: pointer; transition: transform 0.1s; }
+    .nav-link:hover { text-decoration: underline; }
 
-    .hero-actions { display: flex; justify-content: center; gap: 1rem; margin-bottom: 4rem; }
-    .btn-primary { background-color: var(--primary); color: #fff; border: none; padding: 0.85rem 1.75rem; border-radius: 0.5rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.15s; }
-    .btn-primary:hover { background-color: var(--primary-hover); }
-    .btn-secondary { background-color: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 0.85rem 1.75rem; border-radius: 0.5rem; font-size: 0.95rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: background 0.15s; }
-    .btn-secondary:hover { background-color: var(--border); }
+    .hero-section { max-width: 1100px; margin: 3rem auto 2.5rem auto; text-align: center; padding: 0 2rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background-color: #FEF08A; color: var(--text); border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard); padding: 0.4rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 800; text-transform: uppercase; margin-bottom: 1.5rem; }
+    .hero-title { font-size: 3.25rem; font-weight: 900; letter-spacing: -0.03em; line-height: 1.15; color: var(--text); margin-bottom: 1rem; }
+    .hero-subtitle-handwritten { font-family: 'Caveat', cursive; font-size: 1.85rem; color: #16A34A; margin-bottom: 1rem; }
+    .hero-desc { font-size: 1.1rem; color: var(--text-muted); max-width: 750px; margin: 0 auto 2.25rem auto; line-height: 1.6; font-weight: 500; }
+
+    .hero-actions { display: flex; justify-content: center; gap: 1.25rem; margin-bottom: 3.5rem; }
+    .btn-primary { background-color: var(--primary); color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard); padding: 0.85rem 1.75rem; border-radius: 6px; font-size: 0.95rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.1s ease; }
+    .btn-primary:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0px #18181B; background-color: var(--primary-hover); }
+    .btn-primary:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #18181B; }
+
+    .btn-secondary { background-color: #FFFFFF; color: var(--text); border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard); padding: 0.85rem 1.75rem; border-radius: 6px; font-size: 0.95rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; transition: all 0.1s ease; }
+    .btn-secondary:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0px #18181B; background-color: #FEF9C3; }
+    .btn-secondary:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #18181B; }
 
     .grid-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1100px; margin: 0 auto 4rem auto; padding: 0 2rem; }
     @media (max-width: 900px) { .grid-features { grid-template-columns: 1fr; } }
-    .feature-card { background-color: var(--surface); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; text-align: left; }
-    .feature-icon-box { background-color: var(--primary-muted); color: #4ade80; width: 42px; height: 42px; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; }
-    .feature-title { font-size: 1.1rem; font-weight: 700; color: var(--text); }
-    .feature-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+    .feature-card { background-color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard-lg); border-radius: 8px; padding: 1.75rem; display: flex; flex-direction: column; gap: 0.75rem; text-align: left; transition: transform 0.15s; }
+    .feature-card:hover { transform: translateY(-2px); }
+    .feature-card.yellow { background-color: var(--surface-yellow); }
+    .feature-card.green { background-color: var(--surface-green); }
+    .feature-card.blue { background-color: var(--surface-blue); }
 
-    /* WORKSTATION APP STYLING */
-    .app-container { display: flex; width: 100%; height: 100vh; overflow: hidden; }
-    .sidebar { width: 280px; background-color: var(--sidebar); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 1rem; flex-shrink: 0; }
-    .btn-new { background-color: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 0.65rem 1rem; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; width: 100%; margin-bottom: 1rem; }
-    .btn-new:hover { background-color: var(--border); }
+    .feature-icon-box { background-color: #FFFFFF; color: var(--text); width: 44px; height: 44px; border-radius: 6px; border: var(--border-width) solid var(--border); box-shadow: 2px 2px 0px #18181B; display: flex; align-items: center; justify-content: center; margin-bottom: 0.5rem; }
+    .feature-title { font-size: 1.15rem; font-weight: 800; color: var(--text); }
+    .feature-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; font-weight: 500; }
 
-    .nav-group-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); padding: 0.5rem 0.5rem 0.25rem 0.5rem; }
-    .nav-item { padding: 0.5rem 0.65rem; border-radius: 0.375rem; font-size: 0.85rem; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 0.65rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.25rem; }
-    .nav-item:hover, .nav-item.active { background-color: var(--surface); color: var(--text); }
+    /* WORKSTATION APP STYLING (NEO-BRUTALIST DASHBOARD) */
+    .app-container { display: flex; width: 100%; height: 100vh; overflow: hidden; background-color: var(--bg); }
+    .sidebar { width: 280px; background-color: #FFFFFF; border-right: var(--border-width) solid var(--border); display: flex; flex-direction: column; padding: 1.25rem 1rem; flex-shrink: 0; }
+    .btn-new { background-color: #FEF08A; color: var(--text); border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard); padding: 0.75rem 1rem; border-radius: 6px; font-size: 0.9rem; font-weight: 800; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; width: 100%; margin-bottom: 1.25rem; transition: all 0.1s ease; }
+    .btn-new:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0px #18181B; background-color: #FEF9C3; }
+    .btn-new:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0px #18181B; }
 
-    .session-list { display: flex; flex-direction: column; gap: 0.25rem; overflow-y: auto; flex: 1; }
+    .nav-group-title { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); padding: 0.5rem 0.5rem 0.35rem 0.5rem; }
+    .nav-item { padding: 0.6rem 0.75rem; border-radius: 6px; font-size: 0.875rem; font-weight: 700; color: var(--text); cursor: pointer; display: flex; align-items: center; gap: 0.65rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 0.35rem; border: 2px solid transparent; transition: all 0.1s ease; }
+    .nav-item:hover { background-color: #F4F4F5; border-color: var(--border); }
+    .nav-item.active { background-color: #FEF08A; color: var(--text); border: var(--border-width) solid var(--border); box-shadow: 2px 2px 0px #18181B; }
+
+    .session-list { display: flex; flex-direction: column; gap: 0.35rem; overflow-y: auto; flex: 1; margin-top: 0.25rem; }
 
     .main-workspace { flex: 1; display: flex; flex-direction: column; background-color: var(--bg); height: 100vh; position: relative; }
-    .top-header { padding: 0.85rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; background-color: var(--bg); }
+    .top-header { padding: 0.9rem 1.75rem; border-bottom: var(--border-width) solid var(--border); display: flex; justify-content: space-between; align-items: center; background-color: #FFFFFF; }
     
-    .chat-stream { flex: 1; overflow-y: auto; padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; max-width: 900px; margin: 0 auto; width: 100%; }
+    .chat-stream { flex: 1; overflow-y: auto; padding: 1.5rem 2rem; display: flex; flex-direction: column; gap: 1.5rem; max-width: 920px; margin: 0 auto; width: 100%; }
     .msg-row { display: flex; gap: 1rem; }
     .msg-row.user { justify-content: flex-end; }
-    .msg-bubble { max-width: 80%; padding: 1rem 1.25rem; border-radius: 0.75rem; font-size: 0.9rem; line-height: 1.6; }
-    .msg-row.user .msg-bubble { background-color: var(--surface); color: var(--text); border-bottom-right-radius: 0.15rem; }
-    .msg-row.assistant .msg-bubble { background-color: #121215; color: var(--text); border: 1px solid var(--border); border-bottom-left-radius: 0.15rem; }
-    .msg-img { max-width: 250px; max-height: 250px; border-radius: 0.5rem; margin-bottom: 0.75rem; border: 1px solid var(--border); display: block; }
+    .msg-bubble { max-width: 80%; padding: 1rem 1.35rem; border-radius: 8px; font-size: 0.925rem; line-height: 1.6; border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard); font-weight: 500; }
+    .msg-row.user .msg-bubble { background-color: #DCFCE7; color: var(--text); }
+    .msg-row.assistant .msg-bubble { background-color: #FFFFFF; color: var(--text); }
+    .msg-img { max-width: 250px; max-height: 250px; border-radius: 6px; margin-bottom: 0.75rem; border: var(--border-width) solid var(--border); box-shadow: 2px 2px 0px #18181B; display: block; }
 
-    .dock-container { padding: 1rem 2rem 1.5rem 2rem; max-width: 900px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 0.5rem; }
-    .preview-container { display: flex; align-items: center; gap: 0.5rem; background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.5rem 0.75rem; width: max-content; }
-    .dock-thumb { width: 45px; height: 45px; border-radius: 0.375rem; object-fit: cover; border: 1px solid var(--border); }
-    .btn-remove-thumb { background: transparent; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .btn-remove-thumb:hover { color: var(--text); }
+    .dock-container { padding: 1rem 2rem 1.5rem 2rem; max-width: 920px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 0.5rem; }
+    .preview-container { display: flex; align-items: center; gap: 0.5rem; background-color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard); border-radius: 6px; padding: 0.5rem 0.75rem; width: max-content; }
+    .dock-thumb { width: 48px; height: 48px; border-radius: 4px; object-fit: cover; border: var(--border-width) solid var(--border); }
+    .btn-remove-thumb { background: transparent; border: none; color: var(--text); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .btn-remove-thumb:hover { color: #DC2626; }
 
-    .dock-box { background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 0.75rem; padding: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-    textarea { flex: 1; background: transparent; border: none; color: var(--text); font-size: 0.9rem; padding: 0.5rem; resize: none; max-height: 120px; outline: none; }
-    .icon-btn { background: transparent; border: none; color: var(--text-muted); padding: 0.5rem; border-radius: 0.375rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .icon-btn:hover { color: var(--text); background-color: var(--surface); }
+    .dock-box { background-color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard-lg); border-radius: 8px; padding: 0.65rem; display: flex; align-items: center; gap: 0.5rem; }
+    textarea { flex: 1; background: transparent; border: none; color: var(--text); font-size: 0.925rem; font-weight: 500; padding: 0.5rem; resize: none; max-height: 120px; outline: none; }
+    .icon-btn { background: #F4F4F5; border: var(--border-width) solid var(--border); color: var(--text); padding: 0.5rem; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.1s ease; }
+    .icon-btn:hover { background-color: #FEF08A; transform: translate(-1px, -1px); box-shadow: 2px 2px 0px #18181B; }
 
     /* Library Grid */
-    .library-grid { padding: 2rem; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; flex: 1; }
-    .lib-card { background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.25rem; display: flex; flex-direction: column; gap: 0.75rem; }
+    .library-grid { padding: 2rem; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 1.5rem; flex: 1; }
+    .lib-card { background-color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard-lg); border-radius: 8px; padding: 1.35rem; display: flex; flex-direction: column; gap: 0.75rem; }
 
     /* Camera & Onboarding Modals */
-    .modal-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(0,0,0,0.85); display: none; align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(8px); }
-    .modal-box { background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; max-width: 500px; width: 90%; display: flex; flex-direction: column; gap: 1rem; align-items: center; }
+    .modal-overlay { position: fixed; top:0; left:0; right:0; bottom:0; background: rgba(24,24,27,0.75); display: none; align-items: center; justify-content: center; z-index: 100; backdrop-filter: blur(4px); }
+    .modal-box { background-color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: 6px 6px 0px #18181B; border-radius: 8px; padding: 1.75rem; max-width: 520px; width: 90%; display: flex; flex-direction: column; gap: 1rem; align-items: center; }
     
-    .onboarding-box { background-color: var(--sidebar); border: 1px solid var(--border); border-radius: 1rem; padding: 2.5rem; max-width: 680px; width: 90%; display: flex; flex-direction: column; gap: 1.75rem; }
+    .onboarding-box { background-color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: 8px 8px 0px #18181B; border-radius: 10px; padding: 2.5rem; max-width: 680px; width: 90%; display: flex; flex-direction: column; gap: 1.75rem; }
     .onboarding-step { display: none; flex-direction: column; gap: 1.25rem; }
     .onboarding-step.active { display: flex; }
     
     .lang-card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.85rem; }
     @media (max-width: 600px) { .lang-card-grid { grid-template-columns: repeat(2, 1fr); } }
-    .lang-card { background-color: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.85rem; cursor: pointer; text-align: center; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); transition: all 0.15s; }
-    .lang-card:hover, .lang-card.selected { border-color: var(--primary); background-color: var(--primary-muted); color: #4ade80; }
+    .lang-card { background-color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: 2px 2px 0px #18181B; border-radius: 6px; padding: 0.85rem; cursor: pointer; text-align: center; font-size: 0.875rem; font-weight: 700; color: var(--text); transition: all 0.1s ease; }
+    .lang-card:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0px #18181B; background-color: #FEF9C3; }
+    .lang-card.selected { background-color: #DCFCE7; border-color: var(--border); box-shadow: 3px 3px 0px #18181B; color: #15803D; }
 
     .role-card-list { display: flex; flex-direction: column; gap: 0.85rem; }
-    .role-card { background-color: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; cursor: pointer; display: flex; align-items: center; gap: 1rem; transition: all 0.15s; }
-    .role-card:hover, .role-card.selected { border-color: var(--primary); background-color: var(--primary-muted); }
+    .role-card { background-color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: 2px 2px 0px #18181B; border-radius: 6px; padding: 1rem; cursor: pointer; display: flex; align-items: center; gap: 1rem; transition: all 0.1s ease; }
+    .role-card:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0px #18181B; background-color: #FEF9C3; }
+    .role-card.selected { background-color: #DCFCE7; box-shadow: 3px 3px 0px #18181B; }
 
-    video { width: 100%; border-radius: 0.5rem; background-color: #000; height: 300px; object-fit: cover; }
+    video { width: 100%; border-radius: 6px; background-color: #000; height: 300px; object-fit: cover; border: var(--border-width) solid var(--border); }
   </style>
 </head>
 <body>
@@ -225,8 +255,8 @@
     <div class="landing-container">
       <nav class="landing-nav">
         <div class="brand-logo">
-          <i data-lucide="sprout" class="icon" style="color: #4ade80;"></i>
-          Kokodiv
+          <i data-lucide="sprout" class="icon" style="color: #16A34A;"></i>
+          Kokodiv <span class="brand-logo-badge" style="font-size: 0.75rem;">OFFLINE AI</span>
         </div>
         <div class="nav-links">
           <span class="nav-link" id="lblNavWorkstation" onclick="openAppTab('chat')">Farm Assistant</span>
@@ -240,9 +270,10 @@
 
       <section class="hero-section">
         <div class="hero-badge">
-          <i data-lucide="shield-check" class="icon"></i> Offline Cocoa Doctor
+          <i data-lucide="shield-check" class="icon"></i> Works 100% Without Internet
         </div>
         <h1 class="hero-title" id="lblHeroTitle">Offline Cocoa Farm Doctor</h1>
+        <div class="hero-subtitle-handwritten">Diagnose cocoa diseases & get expert agronomy advice in seconds ~</div>
         <p class="hero-desc" id="lblHeroDesc">
           Diagnose plant diseases, get simple treatment steps, and ask questions about your cocoa trees—without needing internet connection.
         </p>
@@ -257,17 +288,17 @@
       </section>
 
       <div class="grid-features">
-        <div class="feature-card">
+        <div class="feature-card yellow">
           <div class="feature-icon-box"><i data-lucide="zap" class="icon"></i></div>
           <div class="feature-title" id="lblFeat1Title">Instant Photo Diagnosis</div>
           <div class="feature-desc" id="lblFeat1Desc">Snap a photo of a sick pod or leaf to find the disease in seconds.</div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card green">
           <div class="feature-icon-box"><i data-lucide="languages" class="icon"></i></div>
           <div class="feature-title" id="lblFeat2Title">Speaks Your Language</div>
           <div class="feature-desc" id="lblFeat2Desc">Simple advice in Yoruba, Hausa, Igbo, Pidgin, French, Swahili, Portuguese, Arabic, and English.</div>
         </div>
-        <div class="feature-card">
+        <div class="feature-card blue">
           <div class="feature-icon-box"><i data-lucide="database" class="icon"></i></div>
           <div class="feature-title" id="lblFeat3Title">Verified Treatment Steps</div>
           <div class="feature-desc" id="lblFeat3Desc">Approved agricultural guides from cocoa research experts.</div>
@@ -281,9 +312,9 @@
     <div class="app-container">
       <!-- Left Sidebar -->
       <div class="sidebar">
-        <div class="brand-logo" style="margin-bottom: 1rem; cursor: pointer;" onclick="showLandingPage()">
-          <i data-lucide="sprout" class="icon" style="color: #4ade80;"></i>
-          Kokodiv
+        <div class="brand-logo" style="margin-bottom: 1.25rem; cursor: pointer;" onclick="showLandingPage()">
+          <i data-lucide="sprout" class="icon" style="color: #16A34A;"></i>
+          Kokodiv <span class="brand-logo-badge" style="font-size: 0.7rem;">OFFLINE</span>
         </div>
 
         <button class="btn-new" onclick="startNewSession()">
@@ -304,9 +335,9 @@
         <div class="nav-group-title" style="margin-top: 1rem;" id="lblSidebarThreads">Past Questions</div>
         <div class="session-list" id="sessionList"></div>
 
-        <div style="padding-top: 1rem; border-top: 1px solid var(--border); margin-top: auto;">
-          <div class="nav-group-title" style="padding:0; margin-bottom:0.25rem;" id="lblSidebarLang">Language</div>
-          <select id="langSelect" class="lang-dropdown" onchange="updateLanguage()" style="width:100%; background:var(--surface); color:var(--text); border:1px solid var(--border); padding:0.5rem; border-radius:0.375rem; font-size:0.85rem;">
+        <div style="padding-top: 1rem; border-top: var(--border-width) solid var(--border); margin-top: auto;">
+          <div class="nav-group-title" style="padding:0; margin-bottom:0.35rem;" id="lblSidebarLang">Language</div>
+          <select id="langSelect" class="lang-dropdown" onchange="updateLanguage()" style="width:100%; background:#FFFFFF; color:var(--text); border:var(--border-width) solid var(--border); box-shadow: 2px 2px 0px #18181B; padding:0.5rem; border-radius:6px; font-size:0.875rem; font-weight:700;">
             <option value="en">English</option>
             <option value="yo">Yoruba (Èdè Yorùbá)</option>
             <option value="ha">Hausa (Harshen Hausa)</option>
@@ -323,8 +354,8 @@
       <!-- Right Workspace -->
       <div class="main-workspace">
         <div class="top-header">
-          <div style="font-size: 1rem; font-weight: 600;" id="workspaceTitle">Cocoa Doctor & Farm Assistant</div>
-          <div style="background:var(--primary-muted); color:#4ade80; padding:0.2rem 0.6rem; border-radius:0.25rem; font-size:0.75rem; font-weight:600; border:1px solid rgba(34,197,94,0.3);" id="lblBadgeOffline">
+          <div style="font-size: 1.05rem; font-weight: 800;" id="workspaceTitle">Cocoa Doctor & Farm Assistant</div>
+          <div style="background:#DCFCE7; color:#18181B; padding:0.25rem 0.75rem; border-radius:6px; font-size:0.775rem; font-weight:800; border:var(--border-width) solid var(--border); box-shadow: 2px 2px 0px #18181B;" id="lblBadgeOffline">
             Works Without Internet
           </div>
         </div>
