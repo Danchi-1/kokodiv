@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kokodiv — App Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    :root {
+      --bg: #FAF9F5;
+      --border: #18181B;
+      --border-width: 2.5px;
+      --shadow-hard: 3px 3px 0px #18181B;
+      --shadow-hard-lg: 4px 4px 0px #18181B;
+      --text: #18181B;
+      --text-muted: #52525B;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    .icon { display: inline-flex; align-items: center; justify-content: center; width: 1.25rem; height: 1.25rem; stroke-width: 2.5px; }
+
+    .header { padding: 1.25rem 2.5rem; background-color: #FFFFFF; border-bottom: var(--border-width) solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .brand-logo { font-size: 1.35rem; font-weight: 900; letter-spacing: -0.03em; color: var(--text); display: flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+    .brand-logo-badge { background-color: #FEF08A; border: var(--border-width) solid var(--border); padding: 0.15rem 0.5rem; border-radius: 4px; box-shadow: 2px 2px 0px #18181B; font-size: 0.7rem; font-weight: 800; }
+
+    .btn-nav { background-color: #FEF08A; color: var(--text); border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard); padding: 0.6rem 1.25rem; border-radius: 6px; font-size: 0.875rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; }
+    .btn-nav:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0px #18181B; }
+
+    .main-content { max-width: 800px; margin: 2.5rem auto; padding: 0 2rem; width: 100%; flex: 1; }
+    .page-title { font-size: 2.25rem; font-weight: 900; letter-spacing: -0.03em; margin-bottom: 0.5rem; }
+    .page-desc { font-size: 1rem; color: var(--text-muted); margin-bottom: 2rem; font-weight: 500; }
+
+    .settings-card { background-color: #FFFFFF; border: var(--border-width) solid var(--border); box-shadow: var(--shadow-hard-lg); border-radius: 8px; padding: 1.75rem; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    .card-title { font-size: 1.15rem; font-weight: 900; display: flex; align-items: center; gap: 0.5rem; }
+
+    .status-badge { display: inline-flex; align-items: center; gap: 0.5rem; background-color: #DCFCE7; border: var(--border-width) solid var(--border); box-shadow: 2px 2px 0px #18181B; padding: 0.35rem 0.85rem; border-radius: 6px; font-size: 0.85rem; font-weight: 800; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="/" class="brand-logo">
+      <i data-lucide="sprout" class="icon" style="color: #16A34A;"></i>
+      Kokodiv <span class="brand-logo-badge">SETTINGS</span>
+    </a>
+    <div style="display: flex; gap: 1rem;">
+      <a href="/app" class="btn-nav">
+        <i data-lucide="message-square" class="icon"></i> Open Doctor
+      </a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1 class="page-title">App Settings & Diagnostics</h1>
+    <p class="page-desc">Manage local AI preferences and view offline system health status.</p>
+
+    <div class="settings-card">
+      <div class="card-title">
+        <i data-lucide="activity" class="icon" style="color: #16A34A;"></i> System Health & Diagnostics
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; font-weight: 600;">
+          <span>MobileNetV3 ONNX Classifier:</span>
+          <span class="status-badge" id="onnxStatus">Active / Ready</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; font-weight: 600;">
+          <span>SQLite RAG Vector DB:</span>
+          <span class="status-badge" id="dbStatus">Loaded (data/kokodiv.db)</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.95rem; font-weight: 600;">
+          <span>Llama.cpp LLM Server (Port 8080):</span>
+          <span class="status-badge" id="llamaStatus">Qwen2.5-0.5B Active</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-card">
+      <div class="card-title">
+        <i data-lucide="globe" class="icon" style="color: #2563EB;"></i> Preferred Language
+      </div>
+      <p style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">Set your default language for diagnostic reports and advisory conversations.</p>
+      <select id="settingsLangSelect" onchange="saveLanguageSetting()" style="background:#FFFFFF; color:var(--text); border:var(--border-width) solid var(--border); box-shadow: 2px 2px 0px #18181B; padding:0.65rem 1rem; border-radius:6px; font-size:0.9rem; font-weight:800; max-width: 350px;">
+        <option value="en">English</option>
+        <option value="yo">Yoruba (Èdè Yorùbá)</option>
+        <option value="ha">Hausa (Harshen Hausa)</option>
+        <option value="ig">Igbo (Asụsụ Igbo)</option>
+        <option value="pcm">West African Pidgin</option>
+        <option value="fr">French (Français)</option>
+        <option value="ar">Arabic (العربية)</option>
+        <option value="pt">Portuguese (Português)</option>
+        <option value="sw">Swahili (Kiswahili)</option>
+      </select>
+    </div>
+  </main>
+
+  <script>
+    function initLucide() {
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function saveLanguageSetting() {
+      const lang = document.getElementById("settingsLangSelect").value;
+      localStorage.setItem("kokodiv_lang", lang);
+    }
+
+    window.onload = function() {
+      initLucide();
+      const savedLang = localStorage.getItem("kokodiv_lang");
+      if (savedLang) document.getElementById("settingsLangSelect").value = savedLang;
+    };
+  </script>
+</body>
+</html>

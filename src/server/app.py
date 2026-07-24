@@ -50,7 +50,7 @@ class KokodivRequestHandler(BaseHTTPRequestHandler):
         parsed_path = parsed_url.path
         query_params = urllib.parse.parse_qs(parsed_url.query)
         
-        if parsed_path == "/":
+        if parsed_path in ["/", "/index.html"]:
             ui_path = os.path.join(BASE_DIR, "src", "ui", "index.html")
             if os.path.exists(ui_path):
                 self._set_headers(200, "text/html; charset=utf-8")
@@ -58,7 +58,37 @@ class KokodivRequestHandler(BaseHTTPRequestHandler):
                     self.wfile.write(f.read())
             else:
                 self._set_headers(404, "text/plain")
-                self.wfile.write(b"Kokodiv UI file not found.")
+                self.wfile.write(b"Kokodiv index.html not found.")
+
+        elif parsed_path in ["/app", "/app.html"]:
+            ui_path = os.path.join(BASE_DIR, "src", "ui", "app.html")
+            if os.path.exists(ui_path):
+                self._set_headers(200, "text/html; charset=utf-8")
+                with open(ui_path, "rb") as f:
+                    self.wfile.write(f.read())
+            else:
+                self._set_headers(404, "text/plain")
+                self.wfile.write(b"Kokodiv app.html not found.")
+
+        elif parsed_path in ["/library", "/library.html"]:
+            ui_path = os.path.join(BASE_DIR, "src", "ui", "library.html")
+            if os.path.exists(ui_path):
+                self._set_headers(200, "text/html; charset=utf-8")
+                with open(ui_path, "rb") as f:
+                    self.wfile.write(f.read())
+            else:
+                self._set_headers(404, "text/plain")
+                self.wfile.write(b"Kokodiv library.html not found.")
+
+        elif parsed_path in ["/settings", "/settings.html"]:
+            ui_path = os.path.join(BASE_DIR, "src", "ui", "settings.html")
+            if os.path.exists(ui_path):
+                self._set_headers(200, "text/html; charset=utf-8")
+                with open(ui_path, "rb") as f:
+                    self.wfile.write(f.read())
+            else:
+                self._set_headers(404, "text/plain")
+                self.wfile.write(b"Kokodiv settings.html not found.")
 
         elif parsed_path == "/api/health":
             self._set_headers(200, "application/json")

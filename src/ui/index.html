@@ -259,12 +259,12 @@
           Kokodiv <span class="brand-logo-badge" style="font-size: 0.75rem;">OFFLINE AI</span>
         </div>
         <div class="nav-links">
-          <span class="nav-link" id="lblNavWorkstation" onclick="openAppTab('chat')">Farm Assistant</span>
-          <span class="nav-link" id="lblNavLibrary" onclick="openAppTab('library')">Treatment Guide</span>
-          <span class="nav-link" id="lblNavSettings" onclick="openAppTab('settings')">App Settings</span>
-          <button class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;" onclick="openAppTab('chat')">
+          <a href="/app" class="nav-link" id="lblNavWorkstation">Farm Assistant</a>
+          <a href="/library" class="nav-link" id="lblNavLibrary">Treatment Guide</a>
+          <a href="/settings" class="nav-link" id="lblNavSettings">App Settings</a>
+          <a href="/app" class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem; text-decoration: none;">
             <i data-lucide="play" class="icon"></i> <span id="lblBtnLaunch">Start Doctor</span>
-          </button>
+          </a>
         </div>
       </nav>
 
@@ -278,12 +278,12 @@
           Diagnose plant diseases, get simple treatment steps, and ask questions about your cocoa trees—without needing internet connection.
         </p>
         <div class="hero-actions">
-          <button class="btn-primary" onclick="openAppTab('chat')">
+          <a href="/app" class="btn-primary" style="text-decoration: none;">
             <i data-lucide="message-square" class="icon"></i> <span id="lblHeroLaunch">Start Doctor</span>
-          </button>
-          <button class="btn-secondary" onclick="openAppTab('library')">
+          </a>
+          <a href="/library" class="btn-secondary" style="text-decoration: none;">
             <i data-lucide="book-open" class="icon"></i> <span id="lblHeroBrowse">Treatment Guide</span>
-          </button>
+          </a>
         </div>
       </section>
 
